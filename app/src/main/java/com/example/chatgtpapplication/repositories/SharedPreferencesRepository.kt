@@ -16,6 +16,8 @@ class SharedPreferencesRepository {
 
     /**
      * Api keyをSharedPreferencesに保存
+     * @param apiKey
+     * @param context
      */
     fun setApiKey(apiKey: String, context: Context) {
         Log.i(tag, "call setApiKey")
@@ -28,6 +30,7 @@ class SharedPreferencesRepository {
 
     /**
      * Api keyをSharedPreferencesから取得
+     * @return ApiKey 存在しない場合は空の文字列
      */
     fun getApiKey(context: Context): String {
         Log.i(tag, "call getApiKey")
@@ -38,6 +41,8 @@ class SharedPreferencesRepository {
 
     /**
      * 性別をSharedPreferencesに保存
+     * @param userSex
+     * @param context
      */
     fun setUserSex(userSex: String, context: Context) {
         Log.i(tag, "call setUserSex")
@@ -50,6 +55,7 @@ class SharedPreferencesRepository {
 
     /**
      * 性別をSharedPreferencesから取得
+     * @return UserSex 存在しない場合は空の文字列
      */
     fun getUserSex(context: Context): String {
         Log.i(tag, "call getUserSex")
@@ -60,6 +66,8 @@ class SharedPreferencesRepository {
 
     /**
      * 年齢をSharedPreferencesに保存
+     * @param userAge
+     * @param context
      */
     fun setUserAge(userAge: Int, context: Context) {
         Log.i(tag, "call setUserAge")
@@ -72,6 +80,7 @@ class SharedPreferencesRepository {
 
     /**
      * 年齢をSharedPreferencesから取得
+     * @return UserAge 存在しない場合は-1
      */
     fun getUserAge(context: Context): Int {
         Log.i(tag, "call getUserAge")

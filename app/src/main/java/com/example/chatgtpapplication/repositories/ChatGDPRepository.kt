@@ -18,6 +18,11 @@ class ChatGDPRepository {
     private val gpt3API = retrofit.create(GPT3API::class.java)
     private val context: String? = null
 
+    /**
+     * ApiKeyが有効化を確認
+     * @param apiKey
+     * @return true(有効) / false(無効)
+     */
     fun checkAPIKey(apiKey: String): Boolean {
         val requestBody = getRequestBody("こんにちは")
         try {
