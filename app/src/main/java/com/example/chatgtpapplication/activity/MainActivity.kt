@@ -37,9 +37,11 @@ class MainActivity : AppCompatActivity() {
         val userAge = viewModel.getUserAge(this)
         if (apiKey.isBlank()) {
             addFragment(SetSecretKeyFragment())
+            return
         }
         if (userSex.isBlank() || userAge == -1) {
             addFragment(RegistrationProfileFragment())
+            return
         }
 
         lifecycleScope.launch(Dispatchers.IO) {
