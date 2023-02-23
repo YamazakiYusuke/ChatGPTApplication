@@ -69,13 +69,13 @@ class RegistrationProfileFragment : Fragment() {
                 年齢 : ${getUserAge()}歳
             """.trimIndent()
             )
-            .setPositiveButton("登録", DialogInterface.OnClickListener { _, _ ->
+            .setPositiveButton("登録") { _, _ ->
                 saveProfileData()
                 changeFragment()
-            })
-            .setNegativeButton("キャンセル", DialogInterface.OnClickListener { _, _ ->
+            }
+            .setNegativeButton("キャンセル") { _, _ ->
                 // 何もしない
-            })
+            }
             .show()
     }
 
@@ -86,6 +86,6 @@ class RegistrationProfileFragment : Fragment() {
 
     private fun changeFragment() {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, RegistrationProfileFragment()).commit()
+            .replace(R.id.frameLayout, SelectExpertFragment()).commit()
     }
 }

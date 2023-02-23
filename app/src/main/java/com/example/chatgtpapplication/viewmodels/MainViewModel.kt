@@ -2,9 +2,11 @@ package com.example.chatgtpapplication.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.chatgtpapplication.repositories.ChatGDPRepository
 import com.example.chatgtpapplication.repositories.SharedPreferencesRepository
 
 class MainViewModel(
+    private val chatGDPRepository: ChatGDPRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository
 ) : ViewModel() {
     /**
@@ -29,6 +31,14 @@ class MainViewModel(
      */
     fun getUserAge(context: Context): Int {
         return sharedPreferencesRepository.getUserAge(context)
+    }
 
+    /**
+     * ApiKeyが有効化を確認
+     * @param apiKey
+     * @return true(有効) / false(無効)
+     */
+    fun checkAPIKey(apiKey: String): Boolean {
+        return chatGDPRepository.checkAPIKey(apiKey)
     }
 }

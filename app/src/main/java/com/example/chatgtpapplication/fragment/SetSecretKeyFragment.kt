@@ -1,8 +1,6 @@
 package com.example.chatgtpapplication.fragment
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -76,10 +74,18 @@ class SetSecretKeyFragment : Fragment() {
     }
 
     /**
-     * プロフィール画面へ切り替え処理
+     * 画面の切り替え処理
      */
     private fun changeFragment() {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, RegistrationProfileFragment()).commit()
+        val userSex = viewModel.getUserSex(requireContext())
+        val userAge = viewModel.getUserAge(requireContext())
+        if (userSex.isBlank() || userAge == -1) {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, RegistrationProfileFragment()).commit()
+        } else {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, SelectExpertFragment()).commit()
+        }
+
     }
 }
