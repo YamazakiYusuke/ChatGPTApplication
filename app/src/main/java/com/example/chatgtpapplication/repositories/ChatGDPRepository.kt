@@ -16,7 +16,7 @@ class ChatGDPRepository {
         .build()
 
     private val gpt3API = retrofit.create(GPT3API::class.java)
-    private val context: String? = null
+    private var context: String? = null
 
     /**
      * ApiKeyが有効化を確認
@@ -47,7 +47,7 @@ class ChatGDPRepository {
         if (response.isSuccessful) {
             val completions = response.body()?.completions
             if (completions != null && completions.isNotEmpty()) {
-                context =
+                this.context = response.body()?.context
                 return completions[0].text
             }
         } else {
