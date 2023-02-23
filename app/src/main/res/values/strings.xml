@@ -3,4 +3,6 @@
     <string name="set_api_key">APIキーをセットしてください。</string>
     <string name="api_key_hint">APIキー取得方法について</string>
     <string name="check_and_set_api_key_hint">チェック＆セット</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

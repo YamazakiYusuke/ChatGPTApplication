@@ -16,11 +16,12 @@ class ChatGDPRepository {
         .build()
 
     private val gpt3API = retrofit.create(GPT3API::class.java)
+    private val context: String? = null
 
     fun checkAPIKey(apiKey: String): Boolean {
         val requestBody = getRequestBody("こんにちは")
         try {
-            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
+            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
             val response = call.execute()
             if (response.isSuccessful) {
                 Log.i(tag, "Successful: ${response.code()} ${response.message()}")
@@ -36,11 +37,12 @@ class ChatGDPRepository {
 
     fun generateText(prompt: String, apiKey: String): String? {
         val requestBody = getRequestBody(prompt)
-        val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
+        val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
         val response = call.execute()
         if (response.isSuccessful) {
             val completions = response.body()?.completions
             if (completions != null && completions.isNotEmpty()) {
+                context =
                 return completions[0].text
             }
         } else {
@@ -53,8 +55,7 @@ class ChatGDPRepository {
         return CompletionRequestBody(
             prompt = prompt,
             temperature = 0.7f,
-            maxTokens = 60,
-            n = 1,
+            maxTokens = 50,
             stop = null,
             model = "davinci"
         )

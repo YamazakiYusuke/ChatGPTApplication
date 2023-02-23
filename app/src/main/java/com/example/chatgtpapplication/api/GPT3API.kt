@@ -13,7 +13,8 @@ interface GPT3API {
     @POST("completions")
     fun getCompletion(
         @Body requestBody: CompletionRequestBody,
-        @Header("Authorization") apiKey: String
+        @Header("Authorization") apiKey: String,
+        @Header("OpenAI-Context") context: String?
     ): Call<CompletionResponse>
 }
 
