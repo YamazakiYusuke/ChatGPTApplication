@@ -1,20 +1,31 @@
-package com.example.chatgtpapplication.viewmodels
+package com.example.chatgptapplication.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.chatgtpapplication.repositories.ChatGDPRepository
-import com.example.chatgtpapplication.repositories.SharedPreferencesRepository
+import com.example.chatgptapplication.repositories.ChatGDPRepository
+import com.example.chatgptapplication.repositories.SharedPreferencesRepository
 
-class MainViewModel(
+class SetSecretKeyViewModel(
     private val chatGDPRepository: ChatGDPRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository
 ) : ViewModel() {
+
     /**
-     * Api keyをSharedPreferencesから取得
-     * @return ApiKey 存在しない場合は空の文字列
+     * ApiKeyが有効化を確認
+     * @param apiKey
+     * @return true(有効) / false(無効)
      */
-    fun getApiKey(context: Context): String {
-        return sharedPreferencesRepository.getApiKey(context)
+    fun checkAPIKey(apiKey: String): Boolean {
+        return chatGDPRepository.checkAPIKey(apiKey)
+    }
+
+    /**
+     * Api keyをSharedPreferencesに保存
+     * @param apiKey
+     * @param context
+     */
+    fun setApiKey(apiKey: String, context: Context) {
+        sharedPreferencesRepository.setApiKey(apiKey, context)
     }
 
     /**
@@ -31,14 +42,5 @@ class MainViewModel(
      */
     fun getUserAge(context: Context): Int {
         return sharedPreferencesRepository.getUserAge(context)
-    }
-
-    /**
-     * ApiKeyが有効化を確認
-     * @param apiKey
-     * @return true(有効) / false(無効)
-     */
-    fun checkAPIKey(apiKey: String): Boolean {
-        return chatGDPRepository.checkAPIKey(apiKey)
     }
 }

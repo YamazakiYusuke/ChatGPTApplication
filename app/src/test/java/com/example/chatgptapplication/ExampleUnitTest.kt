@@ -1,4 +1,4 @@
-package com.example.chatgtpapplication
+package com.example.chatgptapplication
 
 import org.junit.Test
 

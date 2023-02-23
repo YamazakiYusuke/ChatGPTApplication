@@ -1,4 +1,4 @@
-package com.example.chatgtpapplication.utils
+package com.example.chatgptapplication.utils
 
 class Const {
     companion object {

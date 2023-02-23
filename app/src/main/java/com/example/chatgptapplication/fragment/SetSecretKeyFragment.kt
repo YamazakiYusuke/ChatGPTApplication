@@ -1,4 +1,4 @@
-package com.example.chatgtpapplication.fragment
+package com.example.chatgptapplication.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.chatgtpapplication.R
-import com.example.chatgtpapplication.databinding.FragmentSetSecretKeyBinding
-import com.example.chatgtpapplication.repositories.ChatGDPRepository
-import com.example.chatgtpapplication.repositories.SharedPreferencesRepository
-import com.example.chatgtpapplication.viewmodels.SetSecretKeyViewModel
+import com.example.chatgptapplication.R
+import com.example.chatgptapplication.databinding.FragmentSetSecretKeyBinding
+import com.example.chatgptapplication.repositories.ChatGDPRepository
+import com.example.chatgptapplication.repositories.SharedPreferencesRepository
+import com.example.chatgptapplication.viewmodels.SetSecretKeyViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

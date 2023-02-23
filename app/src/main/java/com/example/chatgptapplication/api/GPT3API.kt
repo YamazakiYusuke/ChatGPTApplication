@@ -1,7 +1,7 @@
-package com.example.chatgtpapplication.api
+package com.example.chatgptapplication.api
 
-import com.example.chatgtpapplication.model.CompletionRequestBody
-import com.example.chatgtpapplication.model.CompletionResponse
+import com.example.chatgptapplication.model.CompletionRequestBody
+import com.example.chatgptapplication.model.CompletionResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header

@@ -1,15 +1,12 @@
-package com.example.chatgtpapplication.fragment
+package com.example.chatgptapplication.fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.chatgtpapplication.R
-import com.example.chatgtpapplication.databinding.FragmentRegistrationProfileBinding
-import com.example.chatgtpapplication.databinding.FragmentSelectExpertBinding
-import com.example.chatgtpapplication.viewmodels.SelectExpertViewModel
+import com.example.chatgptapplication.databinding.FragmentSelectExpertBinding
+import com.example.chatgptapplication.viewmodels.SelectExpertViewModel
 
 class SelectExpertFragment : Fragment() {
 

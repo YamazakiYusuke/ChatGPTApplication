@@ -1,8 +1,8 @@
-package com.example.chatgtpapplication.viewmodels
+package com.example.chatgptapplication.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.chatgtpapplication.repositories.SharedPreferencesRepository
+import com.example.chatgptapplication.repositories.SharedPreferencesRepository
 
 class RegistrationProfileViewModel(
     private val sharedPreferencesRepository: SharedPreferencesRepository

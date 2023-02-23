@@ -1,4 +1,4 @@
-package com.example.chatgtpapplication.viewmodels
+package com.example.chatgptapplication.viewmodels
 
 import androidx.lifecycle.ViewModel
 

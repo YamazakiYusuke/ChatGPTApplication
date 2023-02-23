@@ -1,4 +1,4 @@
-package com.example.chatgtpapplication.repositories
+package com.example.chatgptapplication.repositories
 
 import android.content.Context
 import android.content.SharedPreferences

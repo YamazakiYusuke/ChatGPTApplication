@@ -1,4 +1,4 @@
-package com.example.chatgtpapplication.activity
+package com.example.chatgptapplication.activity
 
 import android.os.Bundle
 import android.widget.Toast
@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.chatgtpapplication.R
-import com.example.chatgtpapplication.fragment.RegistrationProfileFragment
-import com.example.chatgtpapplication.fragment.SelectExpertFragment
-import com.example.chatgtpapplication.fragment.SetSecretKeyFragment
-import com.example.chatgtpapplication.repositories.ChatGDPRepository
-import com.example.chatgtpapplication.repositories.SharedPreferencesRepository
-import com.example.chatgtpapplication.viewmodels.MainViewModel
+import com.example.chatgptapplication.R
+import com.example.chatgptapplication.fragment.RegistrationProfileFragment
+import com.example.chatgptapplication.fragment.SelectExpertFragment
+import com.example.chatgptapplication.fragment.SetSecretKeyFragment
+import com.example.chatgptapplication.repositories.ChatGDPRepository
+import com.example.chatgptapplication.repositories.SharedPreferencesRepository
+import com.example.chatgptapplication.viewmodels.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

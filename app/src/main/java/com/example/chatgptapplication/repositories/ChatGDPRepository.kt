@@ -1,9 +1,9 @@
-package com.example.chatgtpapplication.repositories
+package com.example.chatgptapplication.repositories
 
 import android.util.Log
-import com.example.chatgtpapplication.api.GPT3API
-import com.example.chatgtpapplication.model.CompletionRequestBody
-import com.example.chatgtpapplication.utils.Const
+import com.example.chatgptapplication.api.GPT3API
+import com.example.chatgptapplication.model.CompletionRequestBody
+import com.example.chatgptapplication.utils.Const
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

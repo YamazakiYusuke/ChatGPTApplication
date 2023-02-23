@@ -1,7 +1,6 @@
-package com.example.chatgtpapplication.fragment
+package com.example.chatgptapplication.fragment
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
-import com.example.chatgtpapplication.R
-import com.example.chatgtpapplication.databinding.FragmentRegistrationProfileBinding
-import com.example.chatgtpapplication.repositories.SharedPreferencesRepository
-import com.example.chatgtpapplication.viewmodels.RegistrationProfileViewModel
+import com.example.chatgptapplication.R
+import com.example.chatgptapplication.databinding.FragmentRegistrationProfileBinding
+import com.example.chatgptapplication.repositories.SharedPreferencesRepository
+import com.example.chatgptapplication.viewmodels.RegistrationProfileViewModel
 
 
 class RegistrationProfileFragment : Fragment() {
