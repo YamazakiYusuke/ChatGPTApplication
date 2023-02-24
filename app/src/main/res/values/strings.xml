@@ -7,4 +7,10 @@
     <string name="lawyer">弁護士</string>
     <string name="software_engineer">エンジニア</string>
     <string name="doctor">医者</string>
+    <string name="psychological_counselor">心理カウンセラー</string>
+    <string name="accountant">会計士</string>
+    <string name="dentist">歯科医師</string>
+    <string name="english_teacher">英語の先生</string>
+    <string name="dietitian">栄養士</string>
+    <string name="farmer">農家</string>
 </resources>
