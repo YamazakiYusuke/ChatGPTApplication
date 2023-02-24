@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chatgptapplication.R
 import com.example.chatgptapplication.enums.Expert
@@ -16,11 +17,18 @@ class ExpertAdapter(private val context: Context) :
 
     private val expertList = Expert.values()
 
+    var itemClickListener: OnItemClickListener? = null
+    interface OnItemClickListener {
+        fun onItemClick(expert: Expert)
+    }
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val cardView: CardView
         val expertImage: ImageView
         val expertTitle: TextView
 
         init {
+            cardView = view.findViewById(R.id.expertCardView)
             expertImage = view.findViewById(R.id.expertImage)
             expertTitle = view.findViewById(R.id.expertTitle)
         }
@@ -36,6 +44,9 @@ class ExpertAdapter(private val context: Context) :
         val expert = expertList[position]
         viewHolder.expertImage.setImageResource(expert.imageId)
         viewHolder.expertTitle.text = context.getString(expert.titleId)
+        viewHolder.cardView.setOnClickListener {
+            itemClickListener?.onItemClick(expert)
+        }
     }
 
     override fun getItemCount(): Int {

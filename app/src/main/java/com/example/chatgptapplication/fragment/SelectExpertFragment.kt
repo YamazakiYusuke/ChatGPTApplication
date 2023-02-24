@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chatgptapplication.adapters.ExpertAdapter
 import com.example.chatgptapplication.databinding.FragmentSelectExpertBinding
+import com.example.chatgptapplication.enums.Expert
 import com.example.chatgptapplication.viewmodels.SelectExpertViewModel
 
 class SelectExpertFragment : Fragment() {
@@ -27,9 +28,13 @@ class SelectExpertFragment : Fragment() {
     private fun setRecyclerView() {
         val recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
-        val layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = ExpertAdapter(requireContext())
+        adapter.itemClickListener = object : ExpertAdapter.OnItemClickListener{
+            override fun onItemClick(expert: Expert) {
+
+            }
+        }
         recyclerView.adapter = adapter
     }
 }

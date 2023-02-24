@@ -11,6 +11,5 @@ enum class Expert(val imageId: Int, val titleId: Int) {
     ACCOUNTANT(R.drawable.accountant, R.string.accountant),
     DENTIST(R.drawable.dentist, R.string.dentist),
     ENGLISH_TEACHER(R.drawable.english_teacher, R.string.english_teacher),
-    DIETITIAN(R.drawable.dentist, R.string.dentist),
     FARMER(R.drawable.farmer, R.string.farmer)
 }
