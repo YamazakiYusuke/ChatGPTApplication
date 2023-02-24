@@ -4,8 +4,10 @@ import android.util.Log
 import com.example.chatgptapplication.api.GPT3API
 import com.example.chatgptapplication.model.CompletionRequestBody
 import com.example.chatgptapplication.utils.Const
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class ChatGDPRepository {
 
@@ -13,6 +15,13 @@ class ChatGDPRepository {
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(Const.GPT3_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
+        .client(
+            OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .build()
+        )
         .build()
 
     private val gpt3API = retrofit.create(GPT3API::class.java)
@@ -24,6 +33,7 @@ class ChatGDPRepository {
      * @return true(有効) / false(無効)
      */
     fun checkAPIKey(apiKey: String): Boolean {
+        // TODO 例外処理を実装
         val requestBody = getRequestBody("こんにちは")
         try {
             val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
@@ -44,6 +54,7 @@ class ChatGDPRepository {
      * ChatGPTにテキスト生成をリクエスト
      */
     fun generateText(prompt: String, apiKey: String): String? {
+        // TODO 例外処理を実装
         val requestBody = getRequestBody(prompt)
         val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
         val response = call.execute()
