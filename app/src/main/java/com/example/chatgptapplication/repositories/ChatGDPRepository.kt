@@ -40,15 +40,18 @@ class ChatGDPRepository {
         return false
     }
 
+    /**
+     * ChatGPTにテキスト生成をリクエスト
+     */
     fun generateText(prompt: String, apiKey: String): String? {
         val requestBody = getRequestBody(prompt)
         val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
         val response = call.execute()
         if (response.isSuccessful) {
-            val completions = response.body()?.completions
-            if (completions != null && completions.isNotEmpty()) {
-                this.context = response.body()?.context
-                return completions[0].text
+            this.context = response.body()?.context
+            val choices = response.body()?.choices
+            if (choices != null && choices.isNotEmpty()) {
+                return choices[0].text
             }
         } else {
             Log.e(tag, "Error: ${response.code()} ${response.message()}")
@@ -60,9 +63,8 @@ class ChatGDPRepository {
         return CompletionRequestBody(
             prompt = prompt,
             temperature = 0.7f,
-            maxTokens = 50,
-            stop = null,
-            model = "davinci"
+            maxTokens = 1024,
+            model = "text-davinci-003"
         )
     }
 }

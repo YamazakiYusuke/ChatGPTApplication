@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.chatgptapplication.R
 import com.example.chatgptapplication.adapters.ExpertAdapter
 import com.example.chatgptapplication.databinding.FragmentSelectExpertBinding
 import com.example.chatgptapplication.enums.Expert
@@ -32,9 +33,20 @@ class SelectExpertFragment : Fragment() {
         val adapter = ExpertAdapter(requireContext())
         adapter.itemClickListener = object : ExpertAdapter.OnItemClickListener{
             override fun onItemClick(expert: Expert) {
-
+                changeFragment(expert)
             }
         }
         recyclerView.adapter = adapter
+    }
+
+    private fun changeFragment(expert: Expert) {
+        val fragment = ChatFragment()
+        val args = Bundle().apply {
+            putInt(ChatFragment.EXPERT_IMAGE_ID_KEY, expert.imageId)
+            putInt(ChatFragment.EXPERT_NAME_ID_KEY, expert.titleId)
+        }
+        fragment.arguments = args
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.frameLayout, fragment).commit()
     }
 }
