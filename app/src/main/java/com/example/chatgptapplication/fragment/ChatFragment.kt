@@ -11,6 +11,7 @@ import com.example.chatgptapplication.adapters.ChatMessageAdapter
 import com.example.chatgptapplication.databinding.FragmentChatBinding
 import com.example.chatgptapplication.model.ChatMessage
 import com.example.chatgptapplication.repositories.ChatGDPRepository
+import com.example.chatgptapplication.repositories.ChatRepository
 import com.example.chatgptapplication.repositories.SharedPreferencesRepository
 import com.example.chatgptapplication.viewmodels.ChatViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,7 @@ import kotlinx.coroutines.withContext
 class ChatFragment : Fragment() {
 
     private lateinit var binding: FragmentChatBinding
-    private var viewModel = ChatViewModel(ChatGDPRepository(), SharedPreferencesRepository())
+    private var viewModel = ChatViewModel(ChatGDPRepository(), SharedPreferencesRepository(), ChatRepository())
 
     private lateinit var adapter: ChatMessageAdapter
     private val messageData = mutableListOf<ChatMessage>()
@@ -50,11 +51,14 @@ class ChatFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             val response = viewModel.generateText(prompt = prompt, apiKey = apiKey)
             withContext(Dispatchers.Main) {
-                if (response.isNullOrBlank()) {
+                if (response == null) {
                     messageData.add(ChatMessage("エラー", false))
                     adapter.notifyDataSetChanged()
                 } else {
-                    messageData.add(ChatMessage(response, false))
+                    messageData.add(ChatMessage(response.text, false))
+                    withContext(Dispatchers.IO) {
+                        viewModel.insert(prompt, response)
+                    }
                     adapter.notifyDataSetChanged()
                 }
             }
