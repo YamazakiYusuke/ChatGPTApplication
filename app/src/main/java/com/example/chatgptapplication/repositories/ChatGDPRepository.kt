@@ -33,7 +33,6 @@ class ChatGDPRepository {
      * @return true(有効) / false(無効)
      */
     fun checkAPIKey(apiKey: String): Boolean {
-        // TODO 例外処理を実装
         val requestBody = getRequestBody("こんにちは")
         try {
             val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
@@ -54,18 +53,21 @@ class ChatGDPRepository {
      * ChatGPTにテキスト生成をリクエスト
      */
     fun generateText(prompt: String, apiKey: String): String? {
-        // TODO 例外処理を実装
         val requestBody = getRequestBody(prompt)
-        val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
-        val response = call.execute()
-        if (response.isSuccessful) {
-            this.context = response.body()?.context
-            val choices = response.body()?.choices
-            if (choices != null && choices.isNotEmpty()) {
-                return choices[0].text
+        try {
+            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
+            val response = call.execute()
+            if (response.isSuccessful) {
+                this.context = response.body()?.context
+                val choices = response.body()?.choices
+                if (choices != null && choices.isNotEmpty()) {
+                    return choices[0].text
+                }
+            } else {
+                Log.e(tag, "Error: ${response.code()} ${response.message()}")
             }
-        } else {
-            Log.e(tag, "Error: ${response.code()} ${response.message()}")
+        } catch (e: Exception) {
+            Log.e(tag, "Error: $e")
         }
         return null
     }
