@@ -2,7 +2,9 @@ package com.example.chatgptapplication.repositories
 
 import android.util.Log
 import com.example.chatgptapplication.api.GPT3API
+import com.example.chatgptapplication.model.Completion
 import com.example.chatgptapplication.model.CompletionRequestBody
+import com.example.chatgptapplication.model.Response
 import com.example.chatgptapplication.utils.Const
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -25,7 +27,6 @@ class ChatGDPRepository {
         .build()
 
     private val gpt3API = retrofit.create(GPT3API::class.java)
-    private var context: String? = null
 
     /**
      * ApiKeyが有効化を確認
@@ -35,7 +36,7 @@ class ChatGDPRepository {
     fun checkAPIKey(apiKey: String): Boolean {
         val requestBody = getRequestBody("こんにちは")
         try {
-            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
+            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
             val response = call.execute()
             if (response.isSuccessful) {
                 Log.i(tag, "Successful: ${response.code()} ${response.message()}")
@@ -51,17 +52,22 @@ class ChatGDPRepository {
 
     /**
      * ChatGPTにテキスト生成をリクエスト
+     * @param prompt
+     * @param apiKey
+     * @return Response / null(取得失敗)
      */
-    fun generateText(prompt: String, apiKey: String): String? {
+    fun generateText(prompt: String, apiKey: String): Response? {
         val requestBody = getRequestBody(prompt)
         try {
-            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey", context)
+            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
             val response = call.execute()
             if (response.isSuccessful) {
-                this.context = response.body()?.context
-                val choices = response.body()?.choices
-                if (choices != null && choices.isNotEmpty()) {
-                    return choices[0].text
+                val choice = response.body()?.choices?.getOrNull(0)
+                if (choice != null) {
+                    return Response(
+                        text = choice.text,
+                        created_at = response.body()!!.created
+                    )
                 }
             } else {
                 Log.e(tag, "Error: ${response.code()} ${response.message()}")
