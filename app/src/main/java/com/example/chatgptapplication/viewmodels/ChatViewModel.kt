@@ -19,10 +19,13 @@ class ChatViewModel(
 ) : ViewModel() {
     private var chatId: String? = null
 
+    init {
+        setChatId()
+    }
     /**
      * chatIdを生成
      */
-    fun setChatId() {
+    private fun setChatId() {
         chatId = UUID.randomUUID().toString()
     }
 

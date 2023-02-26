@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.chatgptapplication.R
 import com.example.chatgptapplication.model.ChatMessage
 
@@ -24,13 +25,15 @@ class ChatMessageAdapter(context: Context, messages: List<ChatMessage>) :
 
             val iconView = view.findViewById<ImageView>(R.id.icon_view)
             if (message.isMine) {
-                // 自分のメッセージの場合は右側に表示
-                messageTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_END
-                iconView.visibility = View.GONE
+                // 自分のメッセージの場合
+                val color = ContextCompat.getColor(context, R.color.dark_green)
+                view.setBackgroundColor(color)
+                iconView.setImageResource(R.drawable.default_icon)
             } else {
-                // 相手のメッセージの場合は左側に表示
-                messageTextView.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
-                iconView.visibility = View.GONE
+                // 相手のメッセージの場合
+                val color = ContextCompat.getColor(context, R.color.green)
+                view.setBackgroundColor(color)
+                iconView.setImageResource(R.drawable.chat_gpt)
             }
         }
         return view
