@@ -48,6 +48,13 @@ class SetSecretKeyFragment : Fragment() {
                 canClickButton = true
             }
         }
+
+        binding.apiKeyHint.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, ApiKeyHintFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     /**
