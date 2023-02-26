@@ -65,7 +65,7 @@ class ChatGDPRepository {
                 val choice = response.body()?.choices?.getOrNull(0)
                 if (choice != null) {
                     return Response(
-                        text = choice.text,
+                        text = choice.text.trim(),
                         created_at = response.body()!!.created
                     )
                 }
