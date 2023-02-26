@@ -47,6 +47,8 @@ class SelectExpertFragment : Fragment() {
         }
         fragment.arguments = args
         parentFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, fragment).commit()
+            .replace(R.id.frameLayout, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

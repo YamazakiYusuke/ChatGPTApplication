@@ -37,8 +37,7 @@ class ChatFragment : Fragment() {
         binding.sendButton.setOnClickListener {
             val message = binding.messageInput.text.toString().trim()
             if (message.isNotEmpty()) {
-                messageData.add(ChatMessage(message, true))
-                adapter.notifyDataSetChanged()
+                addMessage(message, true)
                 setChatGPTResponse(message)
                 binding.messageInput.setText(R.string.empty)
             }
@@ -46,24 +45,33 @@ class ChatFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.resetChatId()
+    }
+
     private fun setChatGPTResponse(prompt: String) {
         val apiKey = viewModel.getApiKey(requireContext())
         lifecycleScope.launch(Dispatchers.IO) {
             val response = viewModel.generateText(prompt = prompt, apiKey = apiKey)
-            withContext(Dispatchers.Main) {
-                if (response == null) {
-                    messageData.add(ChatMessage("エラー", false))
-                    adapter.notifyDataSetChanged()
-                } else {
-                    messageData.add(ChatMessage(response.text, false))
-                    withContext(Dispatchers.IO) {
-                        viewModel.insert(prompt, response)
-                    }
-                    adapter.notifyDataSetChanged()
+            if (response == null) {
+                withContext(Dispatchers.Main) {
+                    addMessage("エラー", false)
+                }
+            } else {
+                viewModel.insert(prompt, response)
+                withContext(Dispatchers.Main) {
+                    addMessage(response.text, false)
                 }
             }
         }
     }
+
+    private fun addMessage(message: String, isMine: Boolean) {
+        messageData.add(ChatMessage(message, isMine))
+        adapter.notifyDataSetChanged()
+    }
+
 
     companion object {
         const val EXPERT_IMAGE_ID_KEY = "EXPERT_IMAGE_ID_KEY"
