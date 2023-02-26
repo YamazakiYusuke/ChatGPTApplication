@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import com.example.chatgptapplication.R
 import com.example.chatgptapplication.model.ChatMessage
 
-class ChatMessageAdapter(context: Context, messages: List<ChatMessage>) :
+class ChatMessageAdapter(context: Context, messages: List<ChatMessage>, private val expertImageId: Int) :
     ArrayAdapter<ChatMessage>(context, 0, messages) {
 
     private val inflater = LayoutInflater.from(context)
@@ -33,7 +33,7 @@ class ChatMessageAdapter(context: Context, messages: List<ChatMessage>) :
                 // 相手のメッセージの場合
                 val color = ContextCompat.getColor(context, R.color.green)
                 view.setBackgroundColor(color)
-                iconView.setImageResource(R.drawable.chat_gpt)
+                iconView.setImageResource(expertImageId)
             }
         }
         return view
