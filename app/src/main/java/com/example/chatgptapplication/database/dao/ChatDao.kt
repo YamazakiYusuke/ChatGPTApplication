@@ -23,6 +23,6 @@ interface ChatDao {
     /**
      * Chatテーブルからchat_idに一致するデータをcreated_atが新しい順に3件取得
      */
-    @Query("SELECT * FROM chat WHERE chat_id = :chatId ORDER BY created_at desc LIMIT 3")
-    suspend fun getChatsByChatIdForContext(chatId: String): List<Chat>
+    @Query("SELECT * FROM chat WHERE chat_id = :chatId ORDER BY created_at desc LIMIT :limit")
+    suspend fun getChatsByChatIdForContext(chatId: String, limit: Int): List<Chat>
 }

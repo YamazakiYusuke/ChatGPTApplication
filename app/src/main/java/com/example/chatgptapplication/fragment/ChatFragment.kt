@@ -112,9 +112,13 @@ class ChatFragment : Fragment() {
         }
     }
 
+    /**
+     * ListViewにメッセージを追加
+     */
     private fun addMessage(message: String, isMine: Boolean) {
         messageData.add(ChatMessage(message, isMine))
         adapter.notifyDataSetChanged()
+        binding.messageList.setSelection(messageData.size)
     }
 
 
