@@ -17,10 +17,14 @@ class ChatViewModel(
     private val sharedPreferencesRepository: SharedPreferencesRepository,
     private val chatRepository: ChatRepository
 ) : ViewModel() {
+    lateinit var apiKey: String
+        private set
     private var chatId: String? = null
+    lateinit var expertName: String
 
-    init {
+    fun initialize(context: Context) {
         setChatId()
+        fetchApiKey(context)
     }
     /**
      * chatIdを生成
@@ -40,18 +44,18 @@ class ChatViewModel(
      * Api keyをSharedPreferencesから取得
      * @return ApiKey 存在しない場合は空の文字列
      */
-    fun getApiKey(context: Context): String {
-        return sharedPreferencesRepository.getApiKey(context)
+    private fun fetchApiKey(context: Context) {
+        apiKey = sharedPreferencesRepository.getApiKey(context)
     }
 
     /**
      * ChatGPTにテキスト生成をリクエスト
      * @param prompt
-     * @param apiKey
      * @return Response / null(取得失敗)
      */
-    fun generateText(prompt: String, apiKey: String): Response? {
-        return chatGDPRepository.generateText(prompt, apiKey)
+    suspend fun generateText(prompt: String): Response? {
+        val conversationContext = chatRepository.getConversationContext(chatId!!, 1)
+        return chatGDPRepository.generateText(makePrompt(prompt), conversationContext, apiKey)
     }
 
     /**
@@ -60,14 +64,15 @@ class ChatViewModel(
      * @param response
      */
     suspend fun insert(prompt: String, response: Response) {
-        if (chatId.isNullOrBlank()) {
-            setChatId()
-        }
         chatRepository.insert(Chat(
             chat_id = chatId!!,
             prompt = prompt,
             response = response.text,
             created_at = response.created_at
         ))
+    }
+
+    private fun makePrompt(prompt: String): String {
+        return "$expertName として以下の質問に答えてください。\n $prompt"
     }
 }

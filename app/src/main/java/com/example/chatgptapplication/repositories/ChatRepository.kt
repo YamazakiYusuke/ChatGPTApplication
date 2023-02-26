@@ -15,8 +15,15 @@ class ChatRepository {
 
     /**
      * 会話の文脈を取得
+     * @param chatId
+     * @param limit
+     * @return String
      */
-    suspend fun getChatsByChatIdForContext(chatId: String): List<Chat> {
-        return chatDao.getChatsByChatIdForContext(chatId)
+    suspend fun getConversationContext(chatId: String, limit: Int): String {
+        var context = ""
+        chatDao.getChatsByChatIdForContext(chatId, limit).forEachIndexed { index, chat ->
+            context += "Context conversation $index => Q: ${chat.prompt} / A: ${chat.response}\n"
+        }
+        return context
     }
 }
