@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chat GTP Application</string>
+    <string name="app_name">MyExpert</string>
     <string name="empty" />
     <string name="set_api_key">APIキーをセットしてください。</string>
     <string name="api_key_hint">APIキー取得方法について</string>
