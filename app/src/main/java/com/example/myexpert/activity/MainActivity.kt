@@ -1,31 +1,41 @@
 package com.example.myexpert.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
+import com.example.myexpert.databinding.ActivityMainBinding
 import com.example.myexpert.fragment.RegistrationProfileFragment
 import com.example.myexpert.fragment.SelectExpertFragment
 import com.example.myexpert.fragment.SetSecretKeyFragment
 import com.example.myexpert.repositories.ChatGDPRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.MainViewModel
+import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
-
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding!!
     private val viewModel = MainViewModel(ChatGDPRepository(), SharedPreferencesRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         router()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     /**
@@ -61,6 +71,12 @@ class MainActivity : AppCompatActivity() {
     private fun addFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .add(R.id.frameLayout, fragment)
+            .commit()
+    }
+
+    fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayout, fragment)
             .commit()
     }
 }
