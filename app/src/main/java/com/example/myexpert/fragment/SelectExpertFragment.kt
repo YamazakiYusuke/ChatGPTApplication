@@ -14,16 +14,22 @@ import com.example.myexpert.viewmodels.SelectExpertViewModel
 
 class SelectExpertFragment : Fragment() {
 
-    private lateinit var binding: FragmentSelectExpertBinding
+    private var _binding: FragmentSelectExpertBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: SelectExpertViewModel = SelectExpertViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSelectExpertBinding.inflate(inflater, container, false)
+        _binding = FragmentSelectExpertBinding.inflate(inflater, container, false)
         setRecyclerView()
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setRecyclerView() {

@@ -16,14 +16,15 @@ import com.example.myexpert.viewmodels.RegistrationProfileViewModel
 
 class RegistrationProfileFragment : Fragment() {
 
-    private lateinit var binding: FragmentRegistrationProfileBinding
+    private var _binding: FragmentRegistrationProfileBinding? = null
+    private val binding get() = _binding!!
     private val viewModel = RegistrationProfileViewModel(SharedPreferencesRepository())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentRegistrationProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentRegistrationProfileBinding.inflate(inflater, container, false)
 
         binding.seekBarAge.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -39,6 +40,11 @@ class RegistrationProfileFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     /**

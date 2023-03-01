@@ -20,7 +20,8 @@ import kotlinx.coroutines.withContext
 
 class SetSecretKeyFragment : Fragment() {
 
-    private lateinit var binding: FragmentSetSecretKeyBinding
+    private var _binding: FragmentSetSecretKeyBinding? = null
+    private val binding get() = _binding!!
     private val viewModel =
         SetSecretKeyViewModel(ChatGDPRepository(), SharedPreferencesRepository())
     private var canClickButton = true
@@ -29,7 +30,7 @@ class SetSecretKeyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSetSecretKeyBinding.inflate(inflater, container, false)
+        _binding = FragmentSetSecretKeyBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -55,6 +56,11 @@ class SetSecretKeyFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     /**

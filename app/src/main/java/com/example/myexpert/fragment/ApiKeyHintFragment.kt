@@ -9,14 +9,20 @@ import com.example.myexpert.databinding.FragmentApiKeyHintBinding
 import com.example.myexpert.viewmodels.APIKeyHintViewModel
 
 class ApiKeyHintFragment : Fragment() {
-    private lateinit var binding: FragmentApiKeyHintBinding
+    private var _binding: FragmentApiKeyHintBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: APIKeyHintViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentApiKeyHintBinding.inflate(inflater, container, false)
+        _binding = FragmentApiKeyHintBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
