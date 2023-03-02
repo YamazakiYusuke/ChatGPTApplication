@@ -33,7 +33,7 @@ class SelectExpertFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        val recyclerView = binding.recyclerView
+        val recyclerView = binding.expertRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = ExpertAdapter(requireContext())

@@ -11,6 +11,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class BottomNavBarFragment : Fragment() {
+    companion object {
+        private var selectedId: Int = R.id.menu_selection
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,13 +26,15 @@ class BottomNavBarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bottomNav = view.findViewById<BottomNavigationView>(R.id.bottom_nav_bar)
+        bottomNav.selectedItemId = selectedId
         bottomNav.setOnItemSelectedListener { item ->
+            selectedId = item.itemId
             when (item.itemId) {
                 R.id.menu_selection -> {
                     replaceFragment(SelectExpertFragment())
                 }
                 R.id.menu_history -> {
-                    replaceFragment(SetSecretKeyFragment())
+                    replaceFragment(ChatHistoryFragment())
                 }
             }
             return@setOnItemSelectedListener true

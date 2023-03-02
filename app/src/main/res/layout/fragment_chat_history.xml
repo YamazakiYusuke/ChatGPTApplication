@@ -13,7 +13,7 @@
 
         <!-- A RecyclerView with some commonly used attributes -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/expertRecyclerView"
+            android:id="@+id/chatHistoryRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
