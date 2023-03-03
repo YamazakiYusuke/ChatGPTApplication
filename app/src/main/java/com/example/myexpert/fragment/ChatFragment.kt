@@ -39,7 +39,8 @@ class ChatFragment : Fragment() {
         arguments?.getInt(EXPERT_IMAGE_ID_KEY)?.let {
             viewModel.expertImageId = it
         }
-        viewModel.initialize(requireContext())
+        val chatId = arguments?.getString(CHAT_ID_KEY)
+        viewModel.initialize(requireContext(), chatId)
     }
 
     override fun onCreateView(
@@ -49,6 +50,8 @@ class ChatFragment : Fragment() {
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         initializeMessageList()
         initializeSendButton()
+        // 履歴がある場合、復元
+        restoreHistory()
         return binding.root
     }
 
@@ -60,6 +63,28 @@ class ChatFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.resetChatId()
+    }
+
+    /**
+     * Chat履歴を復元
+     */
+    private fun restoreHistory() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            viewModel.getChatHistory().forEach { chat ->
+                messageData.addAll(
+                    listOf(
+                        // 質問
+                        ChatMessage(chat.prompt, true),
+                        // 回答
+                        ChatMessage(chat.response, false)
+                    )
+                )
+            }
+            withContext(Dispatchers.Main) {
+                adapter.notifyDataSetChanged()
+                binding.messageList.setSelection(messageData.size)
+            }
+        }
     }
 
     /**
@@ -135,6 +160,7 @@ class ChatFragment : Fragment() {
 
 
     companion object {
+        const val CHAT_ID_KEY = "CHAT_ID_KEY"
         const val EXPERT_IMAGE_ID_KEY = "EXPERT_IMAGE_ID_KEY"
         const val EXPERT_NAME_ID_KEY = "EXPERT_NAME_ID_KEY"
     }

@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myexpert.R
 import com.example.myexpert.adapters.ChatHistoryAdapter
 import com.example.myexpert.database.table.ChatThread
 import com.example.myexpert.databinding.FragmentChatHistoryBinding
+import com.example.myexpert.enums.Expert
 import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.viewmodels.ChatHistoryViewModel
 import kotlinx.coroutines.Dispatchers
@@ -45,10 +47,25 @@ class ChatHistoryFragment : Fragment() {
                 val adapter = ChatHistoryAdapter(chatHistoryList, requireContext())
                 adapter.itemClickListener = object : ChatHistoryAdapter.OnItemClickListener {
                     override fun onItemClick(chatThred: ChatThread) {
+                        changeFragment(chatThred)
                     }
                 }
                 recyclerView.adapter = adapter
             }
         }
+    }
+
+    private fun changeFragment(chatThread: ChatThread) {
+        val fragment = ChatFragment()
+        val args = Bundle().apply {
+            putString(ChatFragment.CHAT_ID_KEY, chatThread.chat_id)
+            putInt(ChatFragment.EXPERT_IMAGE_ID_KEY, chatThread.expert_image_id)
+            putInt(ChatFragment.EXPERT_NAME_ID_KEY, chatThread.expert_name_id)
+        }
+        fragment.arguments = args
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.frameLayout, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myexpert.R
 import com.example.myexpert.database.table.Chat
+import com.example.myexpert.database.table.ChatThread
 import com.example.myexpert.model.Response
 import com.example.myexpert.repositories.ChatGDPRepository
 import com.example.myexpert.repositories.ChatRepository
@@ -22,13 +23,14 @@ class ChatViewModel(
 ) : ViewModel() {
     lateinit var apiKey: String
         private set
-    private var chatId: String? = null
+    private var _chatId: String? = null
+    private val chatId get() = _chatId!!
     var expertNameId: Int = R.string.empty
     lateinit var expertName: String
     var expertImageId: Int = 0
 
-    fun initialize(context: Context) {
-        setChatId()
+    fun initialize(context: Context, chatId: String?) {
+        setChatId(chatId)
         fetchApiKey(context)
     }
     /**
@@ -36,21 +38,26 @@ class ChatViewModel(
      */
     suspend fun insertChatThread(prompt: String) {
         chatThreadRepository.insert(
-            chatId = chatId!!, expertImageId = expertImageId, expertNameId = expertNameId, prompt = prompt
+            chatId = chatId, expertImageId = expertImageId, expertNameId = expertNameId, prompt = prompt
         )
     }
     /**
      * chatIdを生成
      */
-    private fun setChatId() {
-        chatId = UUID.randomUUID().toString()
+    private fun setChatId(chatId: String?) {
+        if (chatId.isNullOrBlank()) {
+            this._chatId = UUID.randomUUID().toString()
+        } else {
+            this._chatId = chatId
+        }
+
     }
 
     /**
      * chatIdをリセット
      */
     fun resetChatId() {
-        chatId = null
+        _chatId = null
     }
 
     /**
@@ -62,13 +69,33 @@ class ChatViewModel(
     }
 
     /**
+     * 文字列に変換したChat会話履歴を取得
+     * @return 会話文脈
+     */
+    private suspend fun getChatContext(): String {
+        var context = ""
+        val conversations = chatRepository.getConversation(chatId, 1)
+        conversations.forEachIndexed { index, chat ->
+            context += "Context conversation $index => Q: ${chat.prompt} / A: ${chat.response}\n"
+        }
+        return context
+    }
+
+    /**
      * ChatGPTにテキスト生成をリクエスト
      * @param prompt
      * @return Response / null(取得失敗)
      */
     suspend fun generateText(prompt: String): Response? {
-        val conversationContext = chatRepository.getConversationContext(chatId!!, 1)
-        return chatGDPRepository.generateText(makePrompt(prompt), conversationContext, apiKey)
+        return chatGDPRepository.generateText(makePrompt(prompt), getChatContext(), apiKey)
+    }
+
+    /**
+     * Chat履歴を100件まで取得
+     * @return List<Chat>
+     */
+    suspend fun getChatHistory(): List<Chat> {
+        return chatRepository.getConversation(chatId, 100)
     }
 
     /**
@@ -78,7 +105,7 @@ class ChatViewModel(
      */
     suspend fun insert(prompt: String, response: Response) {
         chatRepository.insert(Chat(
-            chat_id = chatId!!,
+            chat_id = chatId,
             prompt = prompt,
             response = response.text,
             created_at = response.created_at
