@@ -13,29 +13,31 @@ import com.example.myexpert.databinding.FragmentChatBinding
 import com.example.myexpert.model.ChatMessage
 import com.example.myexpert.repositories.ChatGDPRepository
 import com.example.myexpert.repositories.ChatRepository
+import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.ChatViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
 class ChatFragment : Fragment() {
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
-    private var viewModel = ChatViewModel(ChatGDPRepository(), SharedPreferencesRepository(), ChatRepository())
-    private var expertImageId: Int = 0
+    private var viewModel = ChatViewModel(ChatGDPRepository(), SharedPreferencesRepository(), ChatRepository(), ChatThreadRepository())
 
     private lateinit var adapter: ChatMessageAdapter
     private val messageData = mutableListOf<ChatMessage>()
 
+    private var isInitQuestion = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getInt(EXPERT_NAME_ID_KEY)?.let {
+            viewModel.expertNameId = it
             viewModel.expertName = getString(it)
         }
         arguments?.getInt(EXPERT_IMAGE_ID_KEY)?.let {
-            expertImageId = it
+            viewModel.expertImageId = it
         }
         viewModel.initialize(requireContext())
     }
@@ -64,7 +66,7 @@ class ChatFragment : Fragment() {
      * MessageListを初期化
      */
     private fun initializeMessageList() {
-        adapter = ChatMessageAdapter(requireContext(), messageData, expertImageId)
+        adapter = ChatMessageAdapter(requireContext(), messageData, viewModel.expertImageId)
         binding.messageList.adapter = adapter
     }
 
@@ -113,6 +115,10 @@ class ChatFragment : Fragment() {
         return if (response == null) {
             "エラー"
         } else {
+            if (isInitQuestion) {
+                viewModel.insertChatThread(prompt)
+                isInitQuestion = false
+            }
             viewModel.insert(prompt, response)
             response.text
         }

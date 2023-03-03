@@ -26,11 +26,4 @@ class ChatRepository {
         }
         return context
     }
-
-    /**
-     * それぞれのChat_idの一番新しいレコードを、新しい物順に取得
-     */
-    suspend fun getChatHistory(): List<Chat> {
-        return chatDao.getChatHistory()
-    }
 }

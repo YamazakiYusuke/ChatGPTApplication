@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c08bb8ef30ba85d8f438fd17c132d544",
+    "identityHash": "5c7fbe52a3c4c58709a0dad0a5620cce",
     "entities": [
       {
         "tableName": "chat",
@@ -47,12 +47,56 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "chat_thread",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`chat_id` TEXT NOT NULL, `expert_image_id` INTEGER NOT NULL, `expert_name_id` INTEGER NOT NULL, `init_question` TEXT NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`chat_id`))",
+        "fields": [
+          {
+            "fieldPath": "chat_id",
+            "columnName": "chat_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expert_image_id",
+            "columnName": "expert_image_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "expert_name_id",
+            "columnName": "expert_name_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "init_question",
+            "columnName": "init_question",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "created_at",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "chat_id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c08bb8ef30ba85d8f438fd17c132d544')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5c7fbe52a3c4c58709a0dad0a5620cce')"
     ]
   }
 }
