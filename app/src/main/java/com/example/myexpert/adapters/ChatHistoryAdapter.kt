@@ -8,11 +8,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myexpert.R
-import com.example.myexpert.database.table.Chat
 import com.example.myexpert.database.table.ChatThread
 
 class ChatHistoryAdapter(
-    private val chatHistoryList: List<ChatThread>,
+    private val chatThreadList: List<ChatThread>,
     private val context: Context
 ) :
     RecyclerView.Adapter<ChatHistoryAdapter.ViewHolder>() {
@@ -21,6 +20,7 @@ class ChatHistoryAdapter(
 
     interface OnItemClickListener {
         fun onItemClick(chatThread: ChatThread)
+        fun onItemLongClick(chatThread: ChatThread)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,10 +40,14 @@ class ChatHistoryAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val chat = chatHistoryList[position]
-        viewHolder.chatTitle.text = truncateString(chat.init_question)
+        val chatThread = chatThreadList[position]
+        viewHolder.chatTitle.text = truncateString(chatThread.init_question)
         viewHolder.parentView.setOnClickListener {
-            itemClickListener?.onItemClick(chat)
+            itemClickListener?.onItemClick(chatThread)
+        }
+        viewHolder.parentView.setOnLongClickListener {
+            itemClickListener?.onItemLongClick(chatThread)
+            return@setOnLongClickListener true
         }
     }
 
@@ -61,6 +65,6 @@ class ChatHistoryAdapter(
     }
 
     override fun getItemCount(): Int {
-        return chatHistoryList.size
+        return chatThreadList.size
     }
 }

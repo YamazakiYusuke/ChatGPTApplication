@@ -24,4 +24,11 @@ class ChatThreadRepository {
     suspend fun getChatThread(): List<ChatThread> {
         return chatThreadDao.getChatThreadList()
     }
+
+    /**
+     * ChatThreadテーブルからデータを削除
+     */
+    suspend fun deleteChatThread(chatThread: ChatThread) {
+        chatThreadDao.delete(chatThread)
+    }
 }

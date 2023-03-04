@@ -15,6 +15,12 @@ interface ChatDao {
     suspend fun insert(chat: Chat)
 
     /**
+     * chatIdに一致するChatテーブルのデータを削除
+     */
+    @Query("DELETE FROM chat WHERE chat_id = :chatId")
+    suspend fun delete(chatId: String)
+
+    /**
      * Chatテーブルからchat_idに一致するデータをcreated_atが古い順に取得
      */
     @Query("SELECT * FROM chat WHERE chat_id = :chatId ORDER BY created_at")

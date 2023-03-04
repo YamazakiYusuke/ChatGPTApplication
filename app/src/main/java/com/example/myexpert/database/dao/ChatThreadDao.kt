@@ -1,6 +1,7 @@
 package com.example.myexpert.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.myexpert.database.table.ChatThread
@@ -12,6 +13,12 @@ interface ChatThreadDao {
      */
     @Insert
     fun insert(chatThread: ChatThread)
+
+    /**
+     * ChatThreadテーブルにデータを保存
+     */
+    @Delete
+    fun delete(chatThread: ChatThread)
 
     /**
      * それぞれのChat_idの一番新しいレコードを、新しい物順に取得

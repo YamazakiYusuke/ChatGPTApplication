@@ -18,4 +18,7 @@
     <string name="chat_message_hint">質問を入力してください</string>
     <string name="selection">選択</string>
     <string name="history">履歴</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="are_you_sure_delete">削除しますか？</string>
 </resources>

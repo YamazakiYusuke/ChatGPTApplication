@@ -14,6 +14,13 @@ class ChatRepository {
     }
 
     /**
+     * chatIdに一致するChatテーブルのデータを削除
+     */
+    suspend fun deleteChat(chatId: String) {
+        chatDao.delete(chatId)
+    }
+
+    /**
      * 会話の文脈を取得
      * @param chatId
      * @param limit
