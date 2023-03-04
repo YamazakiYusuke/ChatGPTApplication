@@ -40,6 +40,11 @@ class ChatHistoryFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        chatThreadList = mutableListOf()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
