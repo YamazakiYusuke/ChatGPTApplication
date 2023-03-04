@@ -10,9 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class ChatGDPRepository {
+class ChatGPTRepository {
 
-    private val tag = "ChatGDPRepository"
+    private val tag = "ChatGPTRepository"
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(Const.GPT3_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

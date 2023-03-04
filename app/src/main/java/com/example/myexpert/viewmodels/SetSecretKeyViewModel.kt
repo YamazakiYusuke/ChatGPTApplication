@@ -2,11 +2,11 @@ package com.example.myexpert.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.example.myexpert.repositories.ChatGDPRepository
+import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 
 class SetSecretKeyViewModel(
-    private val chatGDPRepository: ChatGDPRepository,
+    private val chatGDPRepository: ChatGPTRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository
 ) : ViewModel() {
 

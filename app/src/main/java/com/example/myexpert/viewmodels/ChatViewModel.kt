@@ -5,14 +5,14 @@ import androidx.lifecycle.ViewModel
 import com.example.myexpert.R
 import com.example.myexpert.database.table.Chat
 import com.example.myexpert.models.Response
-import com.example.myexpert.repositories.ChatGDPRepository
+import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import java.util.*
 
 class ChatViewModel(
-    private val chatGDPRepository: ChatGDPRepository,
+    private val chatGDPRepository: ChatGPTRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository,
     private val chatRepository: ChatRepository,
     private val chatThreadRepository: ChatThreadRepository

@@ -11,7 +11,7 @@ import com.example.myexpert.R
 import com.example.myexpert.adapters.ChatMessageAdapter
 import com.example.myexpert.databinding.FragmentChatBinding
 import com.example.myexpert.models.ChatMessage
-import com.example.myexpert.repositories.ChatGDPRepository
+import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
@@ -23,7 +23,7 @@ import kotlinx.coroutines.withContext
 class ChatFragment : Fragment() {
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
-    private var viewModel = ChatViewModel(ChatGDPRepository(), SharedPreferencesRepository(), ChatRepository(), ChatThreadRepository())
+    private var viewModel = ChatViewModel(ChatGPTRepository(), SharedPreferencesRepository(), ChatRepository(), ChatThreadRepository())
 
     private lateinit var adapter: ChatMessageAdapter
     private val messageData = mutableListOf<ChatMessage>()

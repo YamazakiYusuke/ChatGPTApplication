@@ -11,7 +11,7 @@ import com.example.myexpert.databinding.ActivityMainBinding
 import com.example.myexpert.fragments.RegistrationProfileFragment
 import com.example.myexpert.fragments.SelectExpertFragment
 import com.example.myexpert.fragments.SetSecretKeyFragment
-import com.example.myexpert.repositories.ChatGDPRepository
+import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.MainViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
-    private val viewModel = MainViewModel(ChatGDPRepository(), SharedPreferencesRepository())
+    private val viewModel = MainViewModel(ChatGPTRepository(), SharedPreferencesRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()

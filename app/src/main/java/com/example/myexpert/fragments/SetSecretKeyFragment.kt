@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
 import com.example.myexpert.databinding.FragmentSetSecretKeyBinding
-import com.example.myexpert.repositories.ChatGDPRepository
+import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.SetSecretKeyViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ class SetSecretKeyFragment : Fragment() {
     private var _binding: FragmentSetSecretKeyBinding? = null
     private val binding get() = _binding!!
     private val viewModel =
-        SetSecretKeyViewModel(ChatGDPRepository(), SharedPreferencesRepository())
+        SetSecretKeyViewModel(ChatGPTRepository(), SharedPreferencesRepository())
     private var canClickButton = true
 
     override fun onCreateView(
