@@ -1,7 +1,7 @@
 package com.example.myexpert.api
 
-import com.example.myexpert.model.CompletionRequestBody
-import com.example.myexpert.model.CompletionResponse
+import com.example.myexpert.models.CompletionRequestBody
+import com.example.myexpert.models.CompletionResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header

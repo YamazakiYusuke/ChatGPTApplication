@@ -1,8 +1,7 @@
-package com.example.myexpert.fragment
+package com.example.myexpert.fragments
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myexpert.R
 import com.example.myexpert.adapters.ChatHistoryAdapter
-import com.example.myexpert.adapters.ChatMessageAdapter
 import com.example.myexpert.database.table.ChatThread
 import com.example.myexpert.databinding.FragmentChatHistoryBinding
 import com.example.myexpert.repositories.ChatRepository

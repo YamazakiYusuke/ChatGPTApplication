@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:padding="50dp"
-        tools:context=".fragment.ApiKeyHintFragment">
+        tools:context=".fragments.ApiKeyHintFragment">
 
         <ImageView
             android:layout_width="50dp"

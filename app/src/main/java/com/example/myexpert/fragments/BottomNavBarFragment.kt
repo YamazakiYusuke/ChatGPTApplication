@@ -1,4 +1,4 @@
-package com.example.myexpert.fragment
+package com.example.myexpert.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myexpert.R
-import com.example.myexpert.activity.MainActivity
+import com.example.myexpert.activities.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

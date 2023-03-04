@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.myexpert.R
-import com.example.myexpert.model.ChatMessage
+import com.example.myexpert.models.ChatMessage
 
 class ChatMessageAdapter(context: Context, messages: List<ChatMessage>, private val expertImageId: Int) :
     ArrayAdapter<ChatMessage>(context, 0, messages) {

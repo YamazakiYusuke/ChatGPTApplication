@@ -1,4 +1,4 @@
-package com.example.myexpert.fragment
+package com.example.myexpert.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle

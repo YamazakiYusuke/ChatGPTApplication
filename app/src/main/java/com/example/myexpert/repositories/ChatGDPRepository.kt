@@ -2,8 +2,8 @@ package com.example.myexpert.repositories
 
 import android.util.Log
 import com.example.myexpert.api.GPT3API
-import com.example.myexpert.model.CompletionRequestBody
-import com.example.myexpert.model.Response
+import com.example.myexpert.models.CompletionRequestBody
+import com.example.myexpert.models.Response
 import com.example.myexpert.utils.Const
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

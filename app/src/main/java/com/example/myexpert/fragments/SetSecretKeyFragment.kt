@@ -1,4 +1,4 @@
-package com.example.myexpert.fragment
+package com.example.myexpert.fragments
 
 import android.os.Bundle
 import android.util.Log

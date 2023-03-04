@@ -1,4 +1,4 @@
-package com.example.myexpert.model
+package com.example.myexpert.models
 
 data class Response(
     val text: String,

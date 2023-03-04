@@ -1,4 +1,4 @@
-package com.example.myexpert.fragment
+package com.example.myexpert.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
 import com.example.myexpert.adapters.ChatMessageAdapter
 import com.example.myexpert.databinding.FragmentChatBinding
-import com.example.myexpert.model.ChatMessage
+import com.example.myexpert.models.ChatMessage
 import com.example.myexpert.repositories.ChatGDPRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository

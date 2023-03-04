@@ -1,4 +1,4 @@
-package com.example.myexpert.model
+package com.example.myexpert.models
 
 import com.google.gson.annotations.SerializedName
 
