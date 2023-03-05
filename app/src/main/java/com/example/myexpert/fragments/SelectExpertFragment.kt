@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myexpert.R
+import com.example.myexpert.activities.MainActivity
 import com.example.myexpert.adapters.ExpertAdapter
 import com.example.myexpert.databinding.FragmentSelectExpertBinding
 import com.example.myexpert.enums.Expert
@@ -25,6 +26,12 @@ class SelectExpertFragment : Fragment() {
         _binding = FragmentSelectExpertBinding.inflate(inflater, container, false)
         setRecyclerView()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // toolbar戻るボタンを非表示
+        (activity as MainActivity).toolBarCustomView.setBackButtonVisibility(View.INVISIBLE)
     }
 
     override fun onDestroyView() {

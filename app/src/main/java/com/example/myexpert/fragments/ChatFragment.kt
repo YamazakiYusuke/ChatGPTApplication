@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
+import com.example.myexpert.activities.MainActivity
 import com.example.myexpert.adapters.ChatMessageAdapter
 import com.example.myexpert.databinding.FragmentChatBinding
 import com.example.myexpert.models.ChatMessage
@@ -44,6 +45,9 @@ class ChatFragment : Fragment() {
         val chatId = arguments?.getString(CHAT_ID_KEY)
         isInitQuestion = chatId.isNullOrBlank()
         viewModel.initialize(requireContext(), chatId)
+
+        // toolbar戻るボタンを表示
+        (activity as MainActivity).toolBarCustomView.setBackButtonVisibility(View.VISIBLE)
     }
 
     override fun onCreateView(

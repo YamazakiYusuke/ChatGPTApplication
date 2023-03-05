@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myexpert.R
+import com.example.myexpert.activities.MainActivity
 import com.example.myexpert.adapters.ChatHistoryAdapter
 import com.example.myexpert.database.table.ChatThread
 import com.example.myexpert.databinding.FragmentChatHistoryBinding
@@ -36,6 +37,12 @@ class ChatHistoryFragment : Fragment() {
         _binding = FragmentChatHistoryBinding.inflate(layoutInflater, container, false)
         setRecyclerView()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // toolbar戻るボタンを非表示
+        (activity as MainActivity).toolBarCustomView.setBackButtonVisibility(View.INVISIBLE)
     }
 
     override fun onPause() {

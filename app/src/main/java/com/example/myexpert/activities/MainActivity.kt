@@ -1,6 +1,8 @@
 package com.example.myexpert.activities
 
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -14,21 +16,55 @@ import com.example.myexpert.fragments.SetSecretKeyFragment
 import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.MainViewModel
+import com.example.myexpert.views.ToolBarCustomView
+import com.example.myexpert.views.ToolBarCustomViewDelegate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     private val viewModel = MainViewModel(ChatGPTRepository(), SharedPreferencesRepository())
+
+    lateinit var toolBarCustomView: ToolBarCustomView
+        private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // デフォルトのアクションバーを非表示にする
+        supportActionBar?.hide()
+        // カスタムツールバーを設置
+        initCustomToolBar()
         router()
+    }
+
+    private fun initCustomToolBar() {
+        toolBarCustomView = ToolBarCustomView(this)
+        toolBarCustomView.delegate = this
+
+        val title = getString(R.string.app_name)
+        toolBarCustomView.configure(title, true)
+
+        // カスタムツールバーを挿入するコンテナ(入れ物)を指定
+        val layout: LinearLayout = binding.containerForToolbar
+        // ツールバーの表示をコンテナに合わせる
+        toolBarCustomView.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        // カスタムツールバーを表示する
+        layout.addView(toolBarCustomView)
+    }
+
+    /**
+     * ツールバー戻るボタン押下時の処理
+     */
+    override fun onClickedLeftButton() {
+        onBackPressed()
     }
 
     override fun onDestroy() {
@@ -77,4 +113,5 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.frameLayout, fragment)
             .commit()
     }
+
 }

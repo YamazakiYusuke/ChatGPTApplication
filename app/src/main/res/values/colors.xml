@@ -11,4 +11,5 @@
     <color name="green">#609966</color>
     <color name="dark_green">#40513B</color>
     <color name="link">#03A9F4</color>
+    <color name="base_color">#83CBE1</color>
 </resources>
