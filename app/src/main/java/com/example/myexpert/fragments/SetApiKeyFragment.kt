@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
-import com.example.myexpert.databinding.FragmentSetSecretKeyBinding
+import com.example.myexpert.databinding.FragmentSetApiKeyBinding
 import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.SetSecretKeyViewModel
@@ -18,9 +18,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class SetSecretKeyFragment : Fragment() {
+class SetApiKeyFragment : Fragment() {
 
-    private var _binding: FragmentSetSecretKeyBinding? = null
+    private var _binding: FragmentSetApiKeyBinding? = null
     private val binding get() = _binding!!
     private val viewModel =
         SetSecretKeyViewModel(ChatGPTRepository(), SharedPreferencesRepository())
@@ -30,7 +30,7 @@ class SetSecretKeyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSetSecretKeyBinding.inflate(inflater, container, false)
+        _binding = FragmentSetApiKeyBinding.inflate(inflater, container, false)
         return binding.root
     }
 

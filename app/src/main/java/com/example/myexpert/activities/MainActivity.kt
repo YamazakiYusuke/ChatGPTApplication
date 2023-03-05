@@ -13,7 +13,7 @@ import com.example.myexpert.databinding.ActivityMainBinding
 import com.example.myexpert.fragments.WelcomeFragment
 import com.example.myexpert.fragments.RegistrationProfileFragment
 import com.example.myexpert.fragments.SelectExpertFragment
-import com.example.myexpert.fragments.SetSecretKeyFragment
+import com.example.myexpert.fragments.SetApiKeyFragment
 import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.MainViewModel
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
                 } else {
                     Toast.makeText(this@MainActivity, "登録済みのAPI keyは失効しております。", Toast.LENGTH_LONG)
                         .show()
-                    addFragment(SetSecretKeyFragment())
+                    addFragment(SetApiKeyFragment())
                 }
             }
         }

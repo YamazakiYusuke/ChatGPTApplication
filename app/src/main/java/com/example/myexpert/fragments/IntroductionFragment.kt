@@ -1,13 +1,12 @@
 package com.example.myexpert.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.myexpert.R
 import com.example.myexpert.databinding.FragmentIntroductionBinding
-import com.example.myexpert.databinding.FragmentWelcomeBinding
 
 class IntroductionFragment : Fragment() {
     private var _binding: FragmentIntroductionBinding? = null
@@ -17,6 +16,10 @@ class IntroductionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentIntroductionBinding.inflate(inflater, container, false)
+        binding.startButton.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, SetApiKeyFragment()).commit()
+        }
         return binding.root
     }
 
