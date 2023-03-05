@@ -23,4 +23,6 @@
     <string name="are_you_sure_delete">削除しますか？</string>
     <string name="hello_and_welcome">こんにちは\nMyExpertへようこそ</string>
     <string name="next">次へ</string>
+    <string name="start">始める</string>
+    <string name="explain_about_this_app">MyExpertは\nchatGPTをあなたの先生として\nカスタマイズするアプリです。</string>
 </resources>
