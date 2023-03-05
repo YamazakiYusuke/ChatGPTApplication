@@ -2,8 +2,9 @@ package com.example.myexpert.repositories
 
 import android.util.Log
 import com.example.myexpert.api.GPT3API
+import com.example.myexpert.models.Choice
 import com.example.myexpert.models.CompletionRequestBody
-import com.example.myexpert.models.Response
+import com.example.myexpert.models.Message
 import com.example.myexpert.utils.Const
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -33,7 +34,7 @@ class ChatGPTRepository {
      * @return true(有効) / false(無効)
      */
     fun checkAPIKey(apiKey: String): Boolean {
-        val requestBody = getRequestBody("こんにちは")
+        val requestBody = getRequestBody(listOf(Message(role = "user", content = "Hello world!")))
         try {
             val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
             val response = call.execute()
@@ -51,23 +52,19 @@ class ChatGPTRepository {
 
     /**
      * ChatGPTにテキスト生成をリクエスト
-     * @param prompt
-     * @param conversationContext
+     * @param messages
      * @param apiKey
-     * @return Response / null(取得失敗)
+     * @return Choice / null(取得失敗)
      */
-    fun generateText(prompt: String, conversationContext: String, apiKey: String): Response? {
-        val requestBody = getRequestBody(prompt, conversationContext)
+    fun generateText(messages: List<Message>, apiKey: String): Choice? {
+        val requestBody = getRequestBody(messages)
         try {
             val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
             val response = call.execute()
             if (response.isSuccessful) {
                 val choice = response.body()?.choices?.getOrNull(0)
                 if (choice != null) {
-                    return Response(
-                        text = choice.text.trim(),
-                        created_at = response.body()!!.created
-                    )
+                    return choice
                 }
             } else {
                 Log.e(tag, "Error: ${response.code()} ${response.message()}")
@@ -78,13 +75,10 @@ class ChatGPTRepository {
         return null
     }
 
-    private fun getRequestBody(prompt: String, conversationContext: String = ""): CompletionRequestBody {
-        val contextPrompt = conversationContext + prompt
+    private fun getRequestBody(messages: List<Message>): CompletionRequestBody {
         return CompletionRequestBody(
-            prompt = contextPrompt,
-            temperature = 0.7f,
-            maxTokens = 1024,
-            model = "text-davinci-003"
+            model = "gpt-3.5-turbo",
+            messages = messages
         )
     }
 }

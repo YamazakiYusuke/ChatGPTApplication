@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5c7fbe52a3c4c58709a0dad0a5620cce",
+    "identityHash": "47f672dc5ae6d2e71c12bb4227932a10",
     "entities": [
       {
         "tableName": "chat",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `chat_id` TEXT NOT NULL, `prompt` TEXT NOT NULL, `response` TEXT NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `chat_id` TEXT NOT NULL, `role` TEXT NOT NULL, `content` TEXT NOT NULL, `created_at` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,14 +21,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "prompt",
-            "columnName": "prompt",
+            "fieldPath": "role",
+            "columnName": "role",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "response",
-            "columnName": "response",
+            "fieldPath": "content",
+            "columnName": "content",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -96,7 +96,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5c7fbe52a3c4c58709a0dad0a5620cce')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '47f672dc5ae6d2e71c12bb4227932a10')"
     ]
   }
 }

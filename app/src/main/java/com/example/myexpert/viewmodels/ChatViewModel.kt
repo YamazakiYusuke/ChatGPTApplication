@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.myexpert.R
 import com.example.myexpert.database.table.Chat
-import com.example.myexpert.models.Response
+import com.example.myexpert.models.Choice
+import com.example.myexpert.models.Message
 import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
@@ -66,24 +67,24 @@ class ChatViewModel(
 
     /**
      * 文字列に変換したChat会話履歴を取得
+     * @param newContent
      * @return 会話文脈
      */
-    private suspend fun getChatContext(): String {
-        var context = ""
-        val conversations = chatRepository.getConversation(chatId, 1)
-        conversations.forEachIndexed { index, chat ->
-            context += "Context conversation $index => Q: ${chat.prompt} / A: ${chat.response}\n"
+    private suspend fun getMessages(): List<Message> {
+        val messages: MutableList<Message> = mutableListOf()
+        val conversations = chatRepository.getConversation(chatId, 100)
+        conversations.forEachIndexed { _, chat ->
+            messages.add(Message(chat.role, chat.content))
         }
-        return context
+        return messages
     }
 
     /**
      * ChatGPTにテキスト生成をリクエスト
-     * @param prompt
-     * @return Response / null(取得失敗)
+     * @return Choice / null(取得失敗)
      */
-    suspend fun generateText(prompt: String): Response? {
-        return chatGDPRepository.generateText(makePrompt(prompt), getChatContext(), apiKey)
+    suspend fun generateText(): Choice? {
+        return chatGDPRepository.generateText(getMessages(), apiKey)
     }
 
     /**
@@ -96,19 +97,14 @@ class ChatViewModel(
 
     /**
      * Chatテーブルにデータを保存
-     * @param prompt
-     * @param response
+     * @param role
+     * @param content
      */
-    suspend fun insert(prompt: String, response: Response) {
+    suspend fun insert(role: String, content: String) {
         chatRepository.insert(Chat(
             chat_id = chatId,
-            prompt = prompt,
-            response = response.text,
-            created_at = response.created_at
+            role = role,
+            content = content
         ))
-    }
-
-    private fun makePrompt(prompt: String): String {
-        return "$expertName として以下の質問に答えてください。\n $prompt"
     }
 }

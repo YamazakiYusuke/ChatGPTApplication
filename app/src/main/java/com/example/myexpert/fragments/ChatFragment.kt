@@ -5,12 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
 import com.example.myexpert.adapters.ChatMessageAdapter
 import com.example.myexpert.databinding.FragmentChatBinding
 import com.example.myexpert.models.ChatMessage
+import com.example.myexpert.models.Choice
+import com.example.myexpert.models.Message
 import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
@@ -71,13 +74,8 @@ class ChatFragment : Fragment() {
     private fun restoreHistory() {
         lifecycleScope.launch(Dispatchers.IO) {
             viewModel.getChatHistory().forEach { chat ->
-                messageData.addAll(
-                    listOf(
-                        // 質問
-                        ChatMessage(chat.prompt, true),
-                        // 回答
-                        ChatMessage(chat.response, false)
-                    )
+                messageData.add(
+                    ChatMessage(message = chat.content, isMine = chat.role == "user")
                 )
             }
             withContext(Dispatchers.Main) {
@@ -100,24 +98,20 @@ class ChatFragment : Fragment() {
      */
     private fun initializeSendButton() {
         binding.sendButton.setOnClickListener {
-
             try {
                 binding.sendButton.isEnabled = false
                 val inputText = getInputText()
                 if (inputText.isNotEmpty()) {
-                    addMessage(inputText, true)
+                    addMessageListView(inputText)
                     lifecycleScope.launch(Dispatchers.IO) {
-                        val response = getChatGPTResponse(inputText)
-                        withContext(Dispatchers.Main) {
-                            addMessage(response, false)
-                            binding.sendButton.isEnabled = true
-                        }
+                        addMessageDatabase(inputText)
+                        val choice = viewModel.generateText()
+                        setChatGPTResponse(choice)
                     }
-                } else {
-                    binding.sendButton.isEnabled = true
                 }
             } catch (e: Exception) {
                 Log.e(tag, e.toString())
+            } finally {
                 binding.sendButton.isEnabled = true
             }
         }
@@ -134,25 +128,37 @@ class ChatFragment : Fragment() {
 
     /**
      * ChatGptから値を取得
+     * @param choice
      */
-    private suspend fun getChatGPTResponse(prompt: String): String {
-        val response = viewModel.generateText(prompt = prompt)
-        return if (response == null) {
-            "エラー"
-        } else {
-            if (isInitQuestion) {
-                viewModel.insertChatThread(prompt)
-                isInitQuestion = false
+    private suspend fun setChatGPTResponse(choice: Choice?) {
+        if (choice == null) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(context, "エラーが発生しました。", Toast.LENGTH_LONG).show()
             }
-            viewModel.insert(prompt, response)
-            response.text
+        } else {
+            addMessageDatabase(choice.message.content, choice.message.role)
+            withContext(Dispatchers.Main) {
+                addMessageListView(choice.message.content, choice.message.role)
+            }
         }
+    }
+
+    /**
+     * Databaseにメッセージを追加
+     */
+    private suspend fun addMessageDatabase(message: String, role: String = "user") {
+        if (isInitQuestion) {
+            viewModel.insertChatThread(message)
+            isInitQuestion = false
+        }
+        viewModel.insert(role, message)
     }
 
     /**
      * ListViewにメッセージを追加
      */
-    private fun addMessage(message: String, isMine: Boolean) {
+    private fun addMessageListView(message: String, role: String = "user") {
+        val isMine = role == "user"
         messageData.add(ChatMessage(message, isMine))
         adapter.notifyDataSetChanged()
         binding.messageList.setSelection(messageData.size)

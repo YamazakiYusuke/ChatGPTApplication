@@ -27,8 +27,8 @@ interface ChatDao {
     suspend fun getChatsByChatId(chatId: String): List<Chat>
 
     /**
-     * Chatテーブルからchat_idに一致するデータをcreated_atが新しい順に3件取得
+     * Chatテーブルからchat_idに一致するデータをcreated_atが新しい順に取得
      */
-    @Query("SELECT * FROM chat WHERE chat_id = :chatId ORDER BY created_at desc LIMIT :limit")
+    @Query("SELECT * FROM chat WHERE chat_id = :chatId ORDER BY created_at LIMIT :limit")
     suspend fun getChatsByChatIdForContext(chatId: String, limit: Int): List<Chat>
 }
