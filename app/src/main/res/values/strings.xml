@@ -21,4 +21,6 @@
     <string name="yes">はい</string>
     <string name="no">いいえ</string>
     <string name="are_you_sure_delete">削除しますか？</string>
+    <string name="hello_and_welcome">こんにちは\nMyExpertへようこそ</string>
+    <string name="next">次へ</string>
 </resources>

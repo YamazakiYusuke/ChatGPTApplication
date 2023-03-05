@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
 import com.example.myexpert.databinding.ActivityMainBinding
+import com.example.myexpert.fragments.IntroductionFragment
 import com.example.myexpert.fragments.RegistrationProfileFragment
 import com.example.myexpert.fragments.SelectExpertFragment
 import com.example.myexpert.fragments.SetSecretKeyFragment
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
         val userSex = viewModel.getUserSex(this)
         val userAge = viewModel.getUserAge(this)
         if (apiKey.isBlank()) {
-            addFragment(SetSecretKeyFragment())
+            addFragment(IntroductionFragment())
             return
         }
         if (userSex.isBlank() || userAge == -1) {
