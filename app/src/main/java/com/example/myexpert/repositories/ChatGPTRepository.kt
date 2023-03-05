@@ -34,7 +34,7 @@ class ChatGPTRepository {
      * @return true(有効) / false(無効)
      */
     fun checkAPIKey(apiKey: String): Boolean {
-        val requestBody = getRequestBody(listOf(Message(role = "user", content = "Hello world!")))
+        val requestBody = getRequestBody(listOf(Message(role = Const.userRole, content = "Hello world!")))
         try {
             val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
             val response = call.execute()

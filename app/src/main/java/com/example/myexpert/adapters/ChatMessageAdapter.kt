@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.myexpert.R
 import com.example.myexpert.models.ChatMessage
+import com.example.myexpert.utils.Utils
 
 class ChatMessageAdapter(context: Context, messages: List<ChatMessage>, private val expertImageId: Int) :
     ArrayAdapter<ChatMessage>(context, 0, messages) {
@@ -24,12 +25,12 @@ class ChatMessageAdapter(context: Context, messages: List<ChatMessage>, private 
             messageTextView.text = message.message
 
             val iconView = view.findViewById<ImageView>(R.id.icon_view)
-            if (message.isMine) {
+            if (Utils().isUserRole(message.role)) {
                 // 自分のメッセージの場合
                 val color = ContextCompat.getColor(context, R.color.dark_green)
                 view.setBackgroundColor(color)
                 iconView.setImageResource(R.drawable.default_icon)
-            } else {
+            } else if (Utils().isAssistantRole(message.role)) {
                 // 相手のメッセージの場合
                 val color = ContextCompat.getColor(context, R.color.green)
                 view.setBackgroundColor(color)

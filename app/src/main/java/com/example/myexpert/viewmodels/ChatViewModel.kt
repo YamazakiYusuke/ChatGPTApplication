@@ -2,6 +2,7 @@ package com.example.myexpert.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myexpert.R
 import com.example.myexpert.database.table.Chat
 import com.example.myexpert.models.Choice
@@ -10,6 +11,8 @@ import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class ChatViewModel(
@@ -18,8 +21,7 @@ class ChatViewModel(
     private val chatRepository: ChatRepository,
     private val chatThreadRepository: ChatThreadRepository
 ) : ViewModel() {
-    lateinit var apiKey: String
-        private set
+    private lateinit var apiKey: String
     private var _chatId: String? = null
     private val chatId get() = _chatId!!
     var expertNameId: Int = R.string.empty
@@ -29,6 +31,7 @@ class ChatViewModel(
     fun initialize(context: Context, chatId: String?) {
         setChatId(chatId)
         fetchApiKey(context)
+        setSystem()
     }
     /**
      * ChatThreadテーブルを登録
@@ -47,7 +50,18 @@ class ChatViewModel(
         } else {
             this._chatId = chatId
         }
+    }
 
+    /**
+     * アシスタンの演じる役割を指定
+     */
+    private fun setSystem() {
+        viewModelScope.launch(Dispatchers.IO) {
+            insert(
+                role = "system",
+                content = "あなたは、$expertName です。"
+            )
+        }
     }
 
     /**
@@ -66,13 +80,12 @@ class ChatViewModel(
     }
 
     /**
-     * 文字列に変換したChat会話履歴を取得
-     * @param newContent
+     * 会話履歴を取得
      * @return 会話文脈
      */
     private suspend fun getMessages(): List<Message> {
         val messages: MutableList<Message> = mutableListOf()
-        val conversations = chatRepository.getConversation(chatId, 100)
+        val conversations = chatRepository.getChatList(chatId)
         conversations.forEachIndexed { _, chat ->
             messages.add(Message(chat.role, chat.content))
         }
@@ -88,11 +101,19 @@ class ChatViewModel(
     }
 
     /**
-     * Chat履歴を100件まで取得
+     * Chat履歴を取得
      * @return List<Chat>
      */
     suspend fun getChatHistory(): List<Chat> {
-        return chatRepository.getConversation(chatId, 100)
+        return chatRepository.getChatList(chatId)
+    }
+
+    /**
+     * Roleがsystem以外のChat履歴を取得
+     * @return List<Chat>
+     */
+    suspend fun getChatHistoryWithoutSystemRole(): List<Chat> {
+        return chatRepository.getChatListWithoutSystemRole(chatId)
     }
 
     /**

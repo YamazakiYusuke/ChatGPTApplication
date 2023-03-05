@@ -21,12 +21,20 @@ class ChatRepository {
     }
 
     /**
-     * 会話の文脈を取得
+     * chatデータを取得
      * @param chatId
-     * @param limit
      * @return List<Chat>
      */
-    suspend fun getConversation(chatId: String, limit: Int): List<Chat> {
-        return chatDao.getChatsByChatIdForContext(chatId, limit)
+    suspend fun getChatList(chatId: String): List<Chat> {
+        return chatDao.getChatsByChatId(chatId)
+    }
+
+    /**
+     * roleがsystem以外chatデータを取得
+     * @param chatId
+     * @return List<Chat>
+     */
+    suspend fun getChatListWithoutSystemRole(chatId: String): List<Chat> {
+        return chatDao.getChatsByChatIdWithoutSystemRole(chatId)
     }
 }

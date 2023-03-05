@@ -13,11 +13,11 @@ import com.example.myexpert.adapters.ChatMessageAdapter
 import com.example.myexpert.databinding.FragmentChatBinding
 import com.example.myexpert.models.ChatMessage
 import com.example.myexpert.models.Choice
-import com.example.myexpert.models.Message
 import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
+import com.example.myexpert.utils.Const
 import com.example.myexpert.viewmodels.ChatViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,9 +73,9 @@ class ChatFragment : Fragment() {
      */
     private fun restoreHistory() {
         lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.getChatHistory().forEach { chat ->
+            viewModel.getChatHistoryWithoutSystemRole().forEach { chat ->
                 messageData.add(
-                    ChatMessage(message = chat.content, isMine = chat.role == "user")
+                    ChatMessage(message = chat.content, role = chat.role)
                 )
             }
             withContext(Dispatchers.Main) {
@@ -146,7 +146,7 @@ class ChatFragment : Fragment() {
     /**
      * Databaseにメッセージを追加
      */
-    private suspend fun addMessageDatabase(message: String, role: String = "user") {
+    private suspend fun addMessageDatabase(message: String, role: String = Const.userRole) {
         if (isInitQuestion) {
             viewModel.insertChatThread(message)
             isInitQuestion = false
@@ -157,9 +157,8 @@ class ChatFragment : Fragment() {
     /**
      * ListViewにメッセージを追加
      */
-    private fun addMessageListView(message: String, role: String = "user") {
-        val isMine = role == "user"
-        messageData.add(ChatMessage(message, isMine))
+    private fun addMessageListView(message: String, role: String = Const.userRole) {
+        messageData.add(ChatMessage(message, role))
         adapter.notifyDataSetChanged()
         binding.messageList.setSelection(messageData.size)
     }
