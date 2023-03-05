@@ -25,13 +25,13 @@
             android:layout_marginTop="30dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="APIキーとは" />
+            android:text="@string/what_is_api_key" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="APIキーは、APIを使用するためのパスワードのようなものです。APIを利用する人が認証され、利用制限を設けるために使われます。APIキーを他人に知られないようにすることも大切です。" />
+            android:text="@string/explain_about_api_key" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,13 +39,13 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_marginTop="40dp"
-            android:text="APIキー取得手順１" />
+            android:text="@string/acquisition_procedure_1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="OpenAIのアカウントを作成する\n※すでにアカウントがある場合は、手順2へ" />
+            android:text="@string/for_person_already_has_account" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_marginTop="10dp"
             android:autoLink="web"
             android:textColorLink="@color/link"
-            android:text="アカウントの作成手順の解説外部サイト\nhttps://yakiimosan.com/openai-register/" />
+            android:text="@string/site_how_to_create_account" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_marginTop="30dp"
-            android:text="APIキー取得手順2" />
+            android:text="@string/acquisition_procedure_2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,7 +69,6 @@
             android:layout_marginTop="10dp"
             android:autoLink="web"
             android:textColorLink="@color/link"
-            android:text="以下にアクセスしてAPIキーを作成、コピー\nhttps://platform.openai.com/account/api-keys" />
-
+            android:text="@string/link_create_api_key" />
     </LinearLayout>
 </layout>

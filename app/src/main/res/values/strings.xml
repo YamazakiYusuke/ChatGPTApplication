@@ -25,4 +25,12 @@
     <string name="next">次へ</string>
     <string name="start">始める</string>
     <string name="explain_about_this_app">MyExpertは\nchatGPTをあなたの先生として\nカスタマイズするアプリです。</string>
+    <string name="what_is_api_key">APIキーとは</string>
+    <string name="explain_about_api_key">APIキーは、APIを使用するためのパスワードのようなものです。APIを利用する人が認証され、利用制限を設けるために使われます。APIキーを他人に知られないようにすることも大切です。</string>
+    <string name="acquisition_procedure_1">APIキー取得手順１</string>
+    <string name="for_person_already_has_account">OpenAIのアカウントを作成する\n※すでにアカウントがある場合は、手順2へ</string>
+    <string name="site_how_to_create_account">アカウントの作成手順の解説外部サイト\nhttps://yakiimosan.com/openai-register/</string>
+    <string name="acquisition_procedure_2">APIキー取得手順２</string>
+    <string name="link_create_api_key">以下にアクセスしてAPIキーを作成、コピー\nhttps://platform.openai.com/account/api-keys</string>
+
 </resources>
