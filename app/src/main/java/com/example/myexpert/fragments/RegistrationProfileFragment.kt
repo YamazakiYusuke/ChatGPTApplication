@@ -27,15 +27,6 @@ class RegistrationProfileFragment : Fragment() {
     ): View {
         _binding = FragmentRegistrationProfileBinding.inflate(inflater, container, false)
 
-        binding.seekBarAge.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.textViewAge.text = progress.toString()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-
         binding.buttonSubmit.setOnClickListener {
             if (validation()) {
                 showDialog()
@@ -71,6 +62,11 @@ class RegistrationProfileFragment : Fragment() {
             Toast.makeText(activity, "性別を選択してください。", Toast.LENGTH_LONG).show()
             result = false
         }
+        val age = getUserAge()
+        if (age == null) {
+            Toast.makeText(activity, "年齢を入力してくだいさい。", Toast.LENGTH_LONG).show()
+            result = false
+        }
         return result
     }
 
@@ -78,8 +74,10 @@ class RegistrationProfileFragment : Fragment() {
      * 入力値の年齢を取得
      * @return Int
      */
-    private fun getUserAge(): Int {
-        return binding.seekBarAge.progress
+    private fun getUserAge(): Int? {
+        val editText = binding.textFieldAge.editText
+        return editText?.text?.toString()?.toInt()
+
     }
 
     private fun showDialog() {
@@ -103,7 +101,7 @@ class RegistrationProfileFragment : Fragment() {
 
     private fun saveProfileData() {
         viewModel.setUserSex(getGender(), requireContext())
-        viewModel.setUserAge(getUserAge(), requireContext())
+        viewModel.setUserAge(getUserAge()!!, requireContext())
     }
 
     private fun changeFragment() {

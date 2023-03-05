@@ -32,5 +32,13 @@
     <string name="site_how_to_create_account">アカウントの作成手順の解説外部サイト\nhttps://yakiimosan.com/openai-register/</string>
     <string name="acquisition_procedure_2">APIキー取得手順２</string>
     <string name="link_create_api_key">以下にアクセスしてAPIキーを作成、コピー\nhttps://platform.openai.com/account/api-keys</string>
-
+    <string name="please_fill_profile_area">プロフィールを入力してください。</string>
+    <string name="asterisk">*</string>
+    <string name="sex">性別</string>
+    <string name="sex_man">男性</string>
+    <string name="sex_woman">女性</string>
+    <string name="sex_other">その他</string>
+    <string name="age">年齢</string>
+    <string name="sai">歳</string>
+    <string name="complete">完了</string>
 </resources>
