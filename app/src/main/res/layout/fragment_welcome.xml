@@ -38,7 +38,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             app:backgroundTint="@color/button_putty"
-            android:background="@drawable/button_round" />
+            android:background="@drawable/button_round20" />
 
     </LinearLayout>
 </layout>
