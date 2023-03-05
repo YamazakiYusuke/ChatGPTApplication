@@ -75,8 +75,11 @@ class RegistrationProfileFragment : Fragment() {
      * @return Int
      */
     private fun getUserAge(): Int? {
-        val editText = binding.textFieldAge.editText
-        return editText?.text?.toString()?.toInt()
+        val text = binding.textFieldAge.editText?.text?.toString()
+        if (text.isNullOrBlank()) {
+            return null
+        }
+        return text.toInt()
 
     }
 
