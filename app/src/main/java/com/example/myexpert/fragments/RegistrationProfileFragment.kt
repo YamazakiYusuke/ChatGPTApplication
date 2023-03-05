@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.myexpert.R
 import com.example.myexpert.databinding.FragmentRegistrationProfileBinding
@@ -36,7 +37,9 @@ class RegistrationProfileFragment : Fragment() {
         })
 
         binding.buttonSubmit.setOnClickListener {
-            showDialog()
+            if (validation()) {
+                showDialog()
+            }
         }
 
         return binding.root
@@ -55,6 +58,20 @@ class RegistrationProfileFragment : Fragment() {
         val selectedRadioButtonId = binding.radioGroupGender.checkedRadioButtonId
         val radioButton = binding.root.findViewById<RadioButton>(selectedRadioButtonId)
         return radioButton.text.toString()
+    }
+
+    /**
+     * 入力値バリデーション
+     * @return true(入力値正常) / false(入力値異常)
+     */
+    private fun validation(): Boolean {
+        var result = true
+        val selectedRadioButtonId = binding.radioGroupGender.checkedRadioButtonId
+        if (selectedRadioButtonId == -1) {
+            Toast.makeText(activity, "性別を選択してください。", Toast.LENGTH_LONG).show()
+            result = false
+        }
+        return result
     }
 
     /**

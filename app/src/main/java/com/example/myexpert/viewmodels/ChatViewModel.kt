@@ -21,17 +21,21 @@ class ChatViewModel(
     private val chatRepository: ChatRepository,
     private val chatThreadRepository: ChatThreadRepository
 ) : ViewModel() {
+    // APIKey
     private lateinit var apiKey: String
+    // chatId
     private var _chatId: String? = null
     private val chatId get() = _chatId!!
+    // 専門家名
     var expertNameId: Int = R.string.empty
     lateinit var expertName: String
+    // 専門家画像
     var expertImageId: Int = 0
 
     fun initialize(context: Context, chatId: String?) {
         setChatId(chatId)
         fetchApiKey(context)
-        setSystem()
+        setSystem(context)
     }
     /**
      * ChatThreadテーブルを登録
@@ -55,12 +59,34 @@ class ChatViewModel(
     /**
      * アシスタンの演じる役割を指定
      */
-    private fun setSystem() {
+    private fun setSystem(context: Context) {
+        val userAge = sharedPreferencesRepository.getUserAge(context)
+
         viewModelScope.launch(Dispatchers.IO) {
-            insert(
-                role = "system",
-                content = "あなたは、$expertName です。"
-            )
+            if (userAge < 6) {
+                // 5歳以下
+                insert(
+                    role = "system",
+                    content = "あなたは、$expertName です。5才児でも理解できるよう丁寧に説明してください。"
+                )
+            } else if(userAge < 13){
+                // 小学生
+                insert(
+                    role = "system",
+                    content = "あなたは、$expertName です。小学生でも理解できるよう丁寧に説明してください。"
+                )
+            } else if(userAge < 18){
+                // 高校生
+                insert(
+                    role = "system",
+                    content = "あなたは、$expertName です。高校生でも理解できるよう丁寧に説明してください。"
+                )
+            } else {
+                insert(
+                    role = "system",
+                    content = "あなたは、$expertName です。"
+                )
+            }
         }
     }
 

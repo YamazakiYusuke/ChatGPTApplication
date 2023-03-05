@@ -30,8 +30,7 @@ class ChatFragment : Fragment() {
 
     private lateinit var adapter: ChatMessageAdapter
     private val messageData = mutableListOf<ChatMessage>()
-
-    private var isInitQuestion = true
+    private var isInitQuestion = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +42,7 @@ class ChatFragment : Fragment() {
             viewModel.expertImageId = it
         }
         val chatId = arguments?.getString(CHAT_ID_KEY)
+        isInitQuestion = chatId.isNullOrBlank()
         viewModel.initialize(requireContext(), chatId)
     }
 
