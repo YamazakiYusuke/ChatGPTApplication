@@ -51,7 +51,7 @@ class RowsFragment : Fragment() {
     }
 
     private fun setRecyclerView(expertList: Array<Expert>) {
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.row, binding.rowsParent, false)
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.row, null, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.expertRecyclerView)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
