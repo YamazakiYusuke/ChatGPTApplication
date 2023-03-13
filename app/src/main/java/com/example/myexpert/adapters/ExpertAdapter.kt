@@ -12,10 +12,8 @@ import com.example.myexpert.R
 import com.example.myexpert.enums.Expert
 
 
-class ExpertAdapter(private val context: Context) :
+class ExpertAdapter(private val context: Context, private val expertList: Array<Expert>) :
     RecyclerView.Adapter<ExpertAdapter.ViewHolder>() {
-
-    private val expertList = Expert.values()
 
     var itemClickListener: OnItemClickListener? = null
     interface OnItemClickListener {

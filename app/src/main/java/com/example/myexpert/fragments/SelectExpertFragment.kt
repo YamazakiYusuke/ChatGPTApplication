@@ -24,7 +24,7 @@ class SelectExpertFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSelectExpertBinding.inflate(inflater, container, false)
-        setRecyclerView()
+        setExpertRows()
         return binding.root
     }
 
@@ -39,17 +39,14 @@ class SelectExpertFragment : Fragment() {
         _binding = null
     }
 
-    private fun setRecyclerView() {
-        val recyclerView = binding.expertRecyclerView
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ExpertAdapter(requireContext())
-        adapter.itemClickListener = object : ExpertAdapter.OnItemClickListener{
-            override fun onItemClick(expert: Expert) {
-                changeFragment(expert)
-            }
-        }
-        recyclerView.adapter = adapter
+    private fun setExpertRows() {
+        val fragment = RowsFragment()
+        fragment.setExpertClickedCallback(::changeFragment)
+        val data = viewModel.getRowsData()
+        fragment.setRowsData(data)
+        childFragmentManager.beginTransaction()
+            .replace(R.id.expertRows, fragment)
+            .commit()
     }
 
     private fun changeFragment(expert: Expert) {
