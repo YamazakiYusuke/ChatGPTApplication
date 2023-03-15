@@ -2,14 +2,149 @@ package com.example.myexpert.enums
 
 import com.example.myexpert.R
 
-enum class Expert(val imageId: Int, val titleId: Int) {
-    SCHOOL_TEACHER(R.drawable.school_teacher, R.string.school_teacher),
-    LAWYER(R.drawable.lawyer, R.string.lawyer),
-    SOFTWARE_ENGINEER(R.drawable.software_engineer, R.string.software_engineer),
-    DOCTOR(R.drawable.doctor, R.string.doctor),
-    PSYCHOLOGICAL_COUNSELOR(R.drawable.psychological_counselor, R.string.psychological_counselor),
-    ACCOUNTANT(R.drawable.accountant, R.string.accountant),
-    DENTIST(R.drawable.dentist, R.string.dentist),
-    ENGLISH_TEACHER(R.drawable.english_teacher, R.string.english_teacher),
-    FARMER(R.drawable.farmer, R.string.farmer)
+enum class Expert(val categoryId: Int, val imageId: Int, val titleId: Int) {
+    // 先生
+    KINDERGARTEN_TEACHER(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.kindergarten_teacher
+    ),
+    MIDDLE_SCHOOL_TEACHER(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.middle_school_teacher
+    ),
+    HIGH_SCHOOL_TEACHER(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.high_school_teacher
+    ),
+    PROFESSOR_OF_LINGUISTICS(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.professor_of_linguistics
+    ),
+    PROFESSOR_OF_PHYSICS(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.professor_of_physics
+    ),
+    PROFESSOR_OF_PHILOSOPHY(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.professor_of_philosophy
+    ),
+    PROFESSOR_OF_ECONOMICS(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.professor_of_economics
+    ),
+    PROFESSOR_OF_MATHEMATICS(
+        R.string.teacher,
+        R.drawable.ic_baseline_person_24,
+        R.string.professor_of_mathematics
+    ),
+
+    // 医療
+    DOCTOR(
+        R.string.medical,
+        R.drawable.ic_baseline_person_24,
+        R.string.doctor
+    ),
+    NURSE(
+        R.string.medical,
+        R.drawable.ic_baseline_person_24,
+        R.string.nurse
+    ),
+    DENTIST(
+        R.string.medical,
+        R.drawable.ic_baseline_person_24,
+        R.string.dentist
+    ),
+    PHYSICAL_THERAPIST(
+        R.string.medical,
+        R.drawable.ic_baseline_person_24,
+        R.string.physical_therapist
+    ),
+    PSYCHOLOGICAL_COUNSELOR(
+        R.string.medical,
+        R.drawable.ic_baseline_person_24,
+        R.string.psychological_counselor
+    ),
+
+    // IT
+    SOFTWARE_ENGINEER(
+        R.string.it,
+        R.drawable.ic_baseline_person_24,
+        R.string.software_engineer
+    ),
+    MECHANICAL_ENGINEER(
+        R.string.it,
+        R.drawable.ic_baseline_person_24,
+        R.string.mechanical_engineer
+    ),
+    WEB_DESIGNER(
+        R.string.it,
+        R.drawable.ic_baseline_person_24,
+        R.string.web_designer
+    ),
+
+    // 専門家
+    LAWYER(
+        R.string.specialist,
+        R.drawable.ic_baseline_person_24,
+        R.string.lawyer
+    ),
+    ACCOUNTANT(
+        R.string.specialist,
+        R.drawable.ic_baseline_person_24,
+        R.string.accountant
+    ),
+    TAX_ACCOUNTANT(
+        R.string.specialist,
+        R.drawable.ic_baseline_person_24,
+        R.string.tax_accountant
+    ),
+    MEMBER_OF_PARLIAMENT(
+        R.string.specialist,
+        R.drawable.ic_baseline_person_24,
+        R.string.member_of_parliament
+    ),
+
+    // 海外
+    ENGLISH_TEACHER(
+        R.string.global,
+        R.drawable.ic_baseline_person_24,
+        R.string.english_teacher
+    ),
+    CHINESE_TEACHER(
+        R.string.global,
+        R.drawable.ic_baseline_person_24,
+        R.string.chinese_teacher
+    ),
+    KOREAN_TEACHER(
+        R.string.global,
+        R.drawable.ic_baseline_person_24,
+        R.string.korean_teacher
+    ),
+    FRENCH_TEACHER(
+        R.string.global,
+        R.drawable.ic_baseline_person_24,
+        R.string.french_teacher
+    ),
+    RUSSIAN_TEACHER(
+        R.string.global,
+        R.drawable.ic_baseline_person_24,
+        R.string.russian_teacher
+    ),
+    GERMAN_TEACHER(
+        R.string.global,
+        R.drawable.ic_baseline_person_24,
+        R.string.german_teacher
+    ),
+    AINU_TEACHER(
+        R.string.global,
+        R.drawable.ic_baseline_person_24,
+        R.string.ainu_teacher
+    ),
 }

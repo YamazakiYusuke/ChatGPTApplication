@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,7 @@ class RowsFragment : Fragment() {
     private var _binding: FragmentRowsBinding? = null
     private val binding get() = _binding!!
     private var expertClickedCallback: ((expert: Expert) -> Unit)? = null
-    private var rowsData: ArrayList<Array<Expert>>? = null
+    private var rowsData: Map<Int, List<Expert>>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,25 +41,32 @@ class RowsFragment : Fragment() {
         this.expertClickedCallback = expertClickedCallback
     }
 
-    fun setRowsData(rowsData: ArrayList<Array<Expert>>) {
+    fun setRowsData(rowsData: Map<Int, List<Expert>>) {
         this.rowsData = rowsData
     }
 
     private fun setRows() {
-        rowsData?.forEach {
-            setRecyclerView(it)
+        rowsData?.forEach { titleId, expertList ->
+            setRecyclerView(titleId, expertList)
         }
     }
 
-    private fun setRecyclerView(expertList: Array<Expert>) {
+    private fun setRecyclerView(titleId: Int, expertList: List<Expert>) {
         val view = LayoutInflater.from(requireContext()).inflate(R.layout.row, null, false)
+        val expertCategory = view.findViewById<TextView>(R.id.expertCategory)
         val recyclerView = view.findViewById<RecyclerView>(R.id.expertRecyclerView)
+        expertCategory.text = getString(titleId)
+        // 固定サイズ
         recyclerView.setHasFixedSize(true)
+        // 横Layout
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val linearLayoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = linearLayoutManager
+        // 初期position指定
+        recyclerView.scrollToPosition(30)
         val adapter = ExpertAdapter(requireContext(), expertList)
+        // ClickEventの指定
         adapter.itemClickListener = object : ExpertAdapter.OnItemClickListener{
             override fun onItemClick(expert: Expert) {
                 expertClickedCallback?.invoke(expert)

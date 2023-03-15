@@ -12,7 +12,7 @@ import com.example.myexpert.R
 import com.example.myexpert.enums.Expert
 
 
-class ExpertAdapter(private val context: Context, private val expertList: Array<Expert>) :
+class ExpertAdapter(private val context: Context, private val expertList: List<Expert>) :
     RecyclerView.Adapter<ExpertAdapter.ViewHolder>() {
 
     var itemClickListener: OnItemClickListener? = null

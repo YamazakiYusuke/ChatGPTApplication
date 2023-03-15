@@ -4,16 +4,6 @@
     <string name="set_api_key">APIキーをセットしてください。</string>
     <string name="api_key_hint">APIキー取得方法について</string>
     <string name="check_and_set_api_key_hint">チェック＆セット</string>
-    <string name="school_teacher">学校の先生</string>
-    <string name="lawyer">弁護士</string>
-    <string name="software_engineer">エンジニア</string>
-    <string name="doctor">医者</string>
-    <string name="psychological_counselor">心理カウンセラー</string>
-    <string name="accountant">会計士</string>
-    <string name="dentist">歯科医師</string>
-    <string name="english_teacher">英語の先生</string>
-    <string name="dietitian">栄養士</string>
-    <string name="farmer">農家</string>
     <string name="send">送信</string>
     <string name="chat_message_hint">質問を入力してください</string>
     <string name="selection">選択</string>
@@ -42,4 +32,44 @@
     <string name="sai">歳</string>
     <string name="complete">完了</string>
     <string name="lets_select_and_ask_question">職業を選択して質問してみましょう。</string>
+    
+    <!--  専門家カテゴリー  -->
+    <string name="teacher">先生</string>
+    <string name="medical">医療</string>
+    <string name="it">IT</string>
+    <string name="specialist">専門家</string>
+    <string name="global">海外</string>
+    
+    <!--  専門家名称  -->
+    <string name="kindergarten_teacher">幼稚園の先生</string>
+    <string name="middle_school_teacher">中学校の先生</string>
+    <string name="high_school_teacher">高校の先生</string>
+    <string name="professor_of_linguistics">言語学の教授</string>
+    <string name="professor_of_physics">物理学の教授</string>
+    <string name="professor_of_philosophy">哲学の教授</string>
+    <string name="professor_of_economics">経済学の教授</string>
+    <string name="professor_of_mathematics">数学の教授</string>
+
+    <string name="doctor">医者</string>
+    <string name="nurse">看護師</string>
+    <string name="dentist">歯科医師</string>
+    <string name="physical_therapist">理学療法士</string>
+    <string name="psychological_counselor">心理カウンセラー</string>
+
+    <string name="software_engineer">ソフトウェアエンジニア</string>
+    <string name="mechanical_engineer">機械エンジニア</string>
+    <string name="web_designer">webデザイナー</string>
+    
+    <string name="lawyer">弁護士</string>
+    <string name="accountant">会計士</string>
+    <string name="tax_accountant">税理士</string>
+    <string name="member_of_parliament">国会議員</string>
+
+    <string name="english_teacher">英語の先生</string>
+    <string name="chinese_teacher">中国語の先生</string>
+    <string name="korean_teacher">韓国語の先生</string>
+    <string name="french_teacher">フランス語の先生</string>
+    <string name="russian_teacher">ロシア語の先生</string>
+    <string name="german_teacher">ドイツ語の先生</string>
+    <string name="ainu_teacher">アイヌ語の先生</string>
 </resources>

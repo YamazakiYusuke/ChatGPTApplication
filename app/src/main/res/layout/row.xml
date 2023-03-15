@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="27dp"
-    android:layout_marginBottom="11dp"
+    android:paddingTop="27dp"
+    android:paddingBottom="11dp"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:textColor="@color/base_text_color"
-        android:text="AAAAAAA"
         android:textSize="14sp"
         android:textStyle="bold" />
 
