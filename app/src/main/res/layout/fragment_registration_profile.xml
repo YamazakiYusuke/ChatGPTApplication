@@ -18,7 +18,7 @@
             android:layout_marginTop="64dp"
             android:text="@string/please_fill_profile_area"
             android:textColor="@color/base_text_color"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="255dp"
@@ -44,7 +44,7 @@
                     android:includeFontPadding="false"
                     android:text="@string/sex"
                     android:textColor="@color/base_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <RadioGroup
@@ -102,7 +102,7 @@
                     android:includeFontPadding="false"
                     android:text="@string/age"
                     android:textColor="@color/base_text_color"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -144,12 +144,12 @@
         <Button
             android:id="@+id/buttonSubmit"
             android:layout_width="255dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="39dp"
             android:background="@drawable/button_round10"
             android:text="@string/complete"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="21sp"
             android:textStyle="bold"
             app:backgroundTint="@color/button_putty" />
 

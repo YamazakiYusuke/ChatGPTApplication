@@ -41,6 +41,8 @@ class ChatMessageAdapter(context: Context, messages: List<ChatMessage>, private 
             if (Utils().isUserRole(message.role)) {
                 // 自分のメッセージの場合
                 messageTextView.text = message.message
+                val color = ContextCompat.getColor(context, R.color.white)
+                view.setBackgroundColor(color)
                 iconView.setImageResource(R.drawable.default_icon)
             } else if (Utils().isAssistantRole(message.role)) {
                 // 相手のメッセージの場合

@@ -19,7 +19,9 @@ class WelcomeFragment : Fragment() {
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         binding.nextButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, IntroductionFragment()).commit()
+                .replace(R.id.frameLayout, IntroductionFragment())
+                .addToBackStack(null)
+                .commit()
         }
         return binding.root
     }

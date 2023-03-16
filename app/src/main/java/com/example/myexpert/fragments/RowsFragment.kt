@@ -64,7 +64,7 @@ class RowsFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = linearLayoutManager
         // 初期position指定
-        recyclerView.scrollToPosition(30)
+        recyclerView.scrollToPosition(70)
         val adapter = ExpertAdapter(requireContext(), expertList)
         // ClickEventの指定
         adapter.itemClickListener = object : ExpertAdapter.OnItemClickListener{
