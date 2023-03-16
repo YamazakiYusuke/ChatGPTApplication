@@ -15,4 +15,5 @@
     <color name="base_text_color">#444444</color>
     <color name="button_putty">#E0C782</color>
     <color name="asterisk_red">#DC143C</color>
+    <color name="chat_message_gb">#D9D9D9</color>
 </resources>

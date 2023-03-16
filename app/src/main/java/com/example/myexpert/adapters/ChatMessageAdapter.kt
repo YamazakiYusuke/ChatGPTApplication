@@ -41,13 +41,11 @@ class ChatMessageAdapter(context: Context, messages: List<ChatMessage>, private 
             if (Utils().isUserRole(message.role)) {
                 // 自分のメッセージの場合
                 messageTextView.text = message.message
-                val color = ContextCompat.getColor(context, R.color.dark_green)
-                view.setBackgroundColor(color)
                 iconView.setImageResource(R.drawable.default_icon)
             } else if (Utils().isAssistantRole(message.role)) {
                 // 相手のメッセージの場合
                 setTextAsMarkdown(message.message, messageTextView)
-                val color = ContextCompat.getColor(context, R.color.green)
+                val color = ContextCompat.getColor(context, R.color.chat_message_gb)
                 view.setBackgroundColor(color)
                 iconView.setImageResource(expertImageId)
             }
