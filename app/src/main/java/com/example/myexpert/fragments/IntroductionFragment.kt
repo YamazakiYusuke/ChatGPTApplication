@@ -19,7 +19,6 @@ class IntroductionFragment : Fragment() {
         binding.startButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, SetApiKeyFragment())
-                .addToBackStack(null)
                 .commit()
         }
         return binding.root

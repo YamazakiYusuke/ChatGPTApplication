@@ -20,7 +20,6 @@ class WelcomeFragment : Fragment() {
         binding.nextButton.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.frameLayout, IntroductionFragment())
-                .addToBackStack(null)
                 .commit()
         }
         return binding.root

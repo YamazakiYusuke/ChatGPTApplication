@@ -14,7 +14,7 @@
 
         <TextView
             android:layout_width="255dp"
-            android:layout_height="23dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
             android:text="@string/please_fill_profile_area"
             android:textColor="@color/base_text_color"
