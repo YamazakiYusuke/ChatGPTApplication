@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
@@ -19,14 +20,15 @@ import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.MainViewModel
 import com.example.myexpert.views.ToolBarCustomView
 import com.example.myexpert.views.ToolBarCustomViewDelegate
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ToolBarCustomViewDelegate {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
-    private val viewModel = MainViewModel(ChatGPTRepository(), SharedPreferencesRepository())
+    private val viewModel: MainViewModel by viewModels()
 
     lateinit var toolBarCustomView: ToolBarCustomView
         private set

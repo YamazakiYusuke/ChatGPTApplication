@@ -9,17 +9,19 @@ import android.widget.RadioButton
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.myexpert.R
 import com.example.myexpert.databinding.FragmentRegistrationProfileBinding
 import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.viewmodels.RegistrationProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RegistrationProfileFragment : Fragment() {
 
     private var _binding: FragmentRegistrationProfileBinding? = null
     private val binding get() = _binding!!
-    private val viewModel = RegistrationProfileViewModel(SharedPreferencesRepository())
+    private val viewModel: RegistrationProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

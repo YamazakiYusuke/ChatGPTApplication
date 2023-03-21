@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SetSecretKeyViewModel(
+@HiltViewModel
+class SetSecretKeyViewModel @Inject constructor(
     private val chatGDPRepository: ChatGPTRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository
 ) : ViewModel() {

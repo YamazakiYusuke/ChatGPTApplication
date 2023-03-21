@@ -4,8 +4,11 @@ import androidx.lifecycle.ViewModel
 import com.example.myexpert.database.table.ChatThread
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ChatHistoryViewModel(
+@HiltViewModel
+class ChatHistoryViewModel @Inject constructor(
     private val chatThreadRepository: ChatThreadRepository,
     private val chatRepository: ChatRepository
 ) : ViewModel() {

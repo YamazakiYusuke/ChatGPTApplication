@@ -11,11 +11,14 @@ import com.example.myexpert.repositories.ChatGPTRepository
 import com.example.myexpert.repositories.ChatRepository
 import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.repositories.SharedPreferencesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class ChatViewModel(
+@HiltViewModel
+class ChatViewModel @Inject constructor(
     private val chatGDPRepository: ChatGPTRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository,
     private val chatRepository: ChatRepository,
@@ -23,12 +26,15 @@ class ChatViewModel(
 ) : ViewModel() {
     // APIKey
     private lateinit var apiKey: String
+
     // chatId
     private var _chatId: String? = null
     private val chatId get() = _chatId!!
+
     // 専門家名
     var expertNameId: Int = R.string.empty
     lateinit var expertName: String
+
     // 専門家画像
     var expertImageId: Int = 0
 
@@ -37,14 +43,19 @@ class ChatViewModel(
         fetchApiKey(context)
         setSystem(context)
     }
+
     /**
      * ChatThreadテーブルを登録
      */
     suspend fun insertChatThread(prompt: String) {
         chatThreadRepository.insert(
-            chatId = chatId, expertImageId = expertImageId, expertNameId = expertNameId, prompt = prompt
+            chatId = chatId,
+            expertImageId = expertImageId,
+            expertNameId = expertNameId,
+            prompt = prompt
         )
     }
+
     /**
      * chatIdを生成
      */
@@ -69,13 +80,13 @@ class ChatViewModel(
                     role = "system",
                     content = "あなたは、$expertName です。5才児でも理解できるよう丁寧に説明してください。"
                 )
-            } else if(userAge < 13){
+            } else if (userAge < 13) {
                 // 小学生
                 insert(
                     role = "system",
                     content = "あなたは、$expertName です。小学生でも理解できるよう丁寧に説明してください。"
                 )
-            } else if(userAge < 18){
+            } else if (userAge < 18) {
                 // 高校生
                 insert(
                     role = "system",
@@ -148,10 +159,12 @@ class ChatViewModel(
      * @param content
      */
     suspend fun insert(role: String, content: String) {
-        chatRepository.insert(Chat(
-            chat_id = chatId,
-            role = role,
-            content = content
-        ))
+        chatRepository.insert(
+            Chat(
+                chat_id = chatId,
+                role = role,
+                content = content
+            )
+        )
     }
 }

@@ -12,7 +12,9 @@ import com.example.myexpert.R
 import com.example.myexpert.adapters.ExpertAdapter
 import com.example.myexpert.databinding.FragmentRowsBinding
 import com.example.myexpert.enums.Expert
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RowsFragment : Fragment() {
     private var _binding: FragmentRowsBinding? = null
     private val binding get() = _binding!!

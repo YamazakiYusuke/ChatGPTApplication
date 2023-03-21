@@ -3,8 +3,11 @@ package com.example.myexpert.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.myexpert.repositories.SharedPreferencesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RegistrationProfileViewModel(
+@HiltViewModel
+class RegistrationProfileViewModel @Inject constructor(
     private val sharedPreferencesRepository: SharedPreferencesRepository
 ) : ViewModel() {
 

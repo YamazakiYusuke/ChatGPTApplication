@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myexpert.R
@@ -14,18 +15,17 @@ import com.example.myexpert.activities.MainActivity
 import com.example.myexpert.adapters.ChatHistoryAdapter
 import com.example.myexpert.database.table.ChatThread
 import com.example.myexpert.databinding.FragmentChatHistoryBinding
-import com.example.myexpert.repositories.ChatRepository
-import com.example.myexpert.repositories.ChatThreadRepository
 import com.example.myexpert.viewmodels.ChatHistoryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+@AndroidEntryPoint
 class ChatHistoryFragment : Fragment() {
     private var _binding: FragmentChatHistoryBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: ChatHistoryViewModel = ChatHistoryViewModel(ChatThreadRepository(), ChatRepository())
+    private val viewModel: ChatHistoryViewModel by viewModels()
 
     private lateinit var adapter: ChatHistoryAdapter
     var chatThreadList: MutableList<ChatThread> = mutableListOf()
@@ -67,6 +67,7 @@ class ChatHistoryFragment : Fragment() {
                     override fun onItemClick(chatThred: ChatThread) {
                         changeFragment(chatThred)
                     }
+
                     override fun onItemLongClick(chatThread: ChatThread) {
                         removeChatThread(chatThread)
                     }
@@ -94,9 +95,11 @@ class ChatHistoryFragment : Fragment() {
     private fun removeChatThread(chatThread: ChatThread) {
         AlertDialog.Builder(context)
             .setTitle(R.string.are_you_sure_delete)
-            .setMessage("""
+            .setMessage(
+                """
                 チャット: ${chatThread.init_question}
-            """.trimIndent())
+            """.trimIndent()
+            )
             .setPositiveButton(R.string.yes) { _, _ ->
                 lifecycleScope.launch(Dispatchers.IO) {
                     // ChatThread削除

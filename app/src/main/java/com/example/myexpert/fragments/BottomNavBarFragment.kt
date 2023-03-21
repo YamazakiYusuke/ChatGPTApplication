@@ -8,8 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.myexpert.R
 import com.example.myexpert.activities.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class BottomNavBarFragment : Fragment() {
     companion object {
         private var selectedId: Int = R.id.menu_selection

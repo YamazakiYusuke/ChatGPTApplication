@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myexpert.R
 import com.example.myexpert.databinding.FragmentIntroductionBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class IntroductionFragment : Fragment() {
     private var _binding: FragmentIntroductionBinding? = null
     private val binding get() = _binding!!

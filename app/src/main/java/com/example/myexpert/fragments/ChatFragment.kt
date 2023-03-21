@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
 import com.example.myexpert.activities.MainActivity
@@ -14,20 +15,18 @@ import com.example.myexpert.adapters.ChatMessageAdapter
 import com.example.myexpert.databinding.FragmentChatBinding
 import com.example.myexpert.models.ChatMessage
 import com.example.myexpert.models.Choice
-import com.example.myexpert.repositories.ChatGPTRepository
-import com.example.myexpert.repositories.ChatRepository
-import com.example.myexpert.repositories.ChatThreadRepository
-import com.example.myexpert.repositories.SharedPreferencesRepository
 import com.example.myexpert.utils.Const
 import com.example.myexpert.viewmodels.ChatViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class ChatFragment : Fragment() {
     private var _binding: FragmentChatBinding? = null
     private val binding get() = _binding!!
-    private var viewModel = ChatViewModel(ChatGPTRepository(), SharedPreferencesRepository(), ChatRepository(), ChatThreadRepository())
+    private val viewModel: ChatViewModel by viewModels()
 
     private lateinit var adapter: ChatMessageAdapter
     private val messageData = mutableListOf<ChatMessage>()

@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.myexpert.databinding.FragmentApiKeyHintBinding
 import com.example.myexpert.viewmodels.APIKeyHintViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ApiKeyHintFragment : Fragment() {
     private var _binding: FragmentApiKeyHintBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: APIKeyHintViewModel
+    private val viewModel: APIKeyHintViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

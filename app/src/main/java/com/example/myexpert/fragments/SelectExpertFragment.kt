@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myexpert.R
 import com.example.myexpert.activities.MainActivity
@@ -12,12 +13,14 @@ import com.example.myexpert.adapters.ExpertAdapter
 import com.example.myexpert.databinding.FragmentSelectExpertBinding
 import com.example.myexpert.enums.Expert
 import com.example.myexpert.viewmodels.SelectExpertViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SelectExpertFragment : Fragment() {
 
     private var _binding: FragmentSelectExpertBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SelectExpertViewModel = SelectExpertViewModel()
+    private val viewModel: SelectExpertViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
