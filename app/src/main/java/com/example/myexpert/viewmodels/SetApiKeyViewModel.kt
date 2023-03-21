@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SetSecretKeyViewModel @Inject constructor(
+class SetApiKeyViewModel @Inject constructor(
     private val chatGDPRepository: ChatGPTRepository,
     private val sharedPreferencesRepository: SharedPreferencesRepository
 ) : ViewModel() {

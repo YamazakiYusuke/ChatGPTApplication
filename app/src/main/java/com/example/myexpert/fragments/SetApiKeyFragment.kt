@@ -11,9 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.myexpert.R
 import com.example.myexpert.databinding.FragmentSetApiKeyBinding
-import com.example.myexpert.repositories.ChatGPTRepository
-import com.example.myexpert.repositories.SharedPreferencesRepository
-import com.example.myexpert.viewmodels.SetSecretKeyViewModel
+import com.example.myexpert.viewmodels.SetApiKeyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,7 +22,7 @@ class SetApiKeyFragment : Fragment() {
 
     private var _binding: FragmentSetApiKeyBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SetSecretKeyViewModel by viewModels()
+    private val viewModel: SetApiKeyViewModel by viewModels()
     private var canClickButton = true
 
     override fun onCreateView(
@@ -41,12 +39,14 @@ class SetApiKeyFragment : Fragment() {
             if (!canClickButton) {
                 return@setOnClickListener
             }
+            binding.indicator.visibility = View.VISIBLE
 
             try {
                 checkAndSetApiKey()
             } catch (e: Exception) {
                 Log.e(tag, e.toString())
             } finally {
+                binding.indicator.visibility = View.GONE
                 canClickButton = true
             }
         }
