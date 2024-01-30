@@ -1,7 +1,7 @@
 package com.example.myexpert.repositories
 
 import android.util.Log
-import com.example.myexpert.api.GPT3API
+import com.example.myexpert.api.GPTAPI
 import com.example.myexpert.models.Choice
 import com.example.myexpert.models.CompletionRequestBody
 import com.example.myexpert.models.Message
@@ -15,7 +15,7 @@ class ChatGPTRepository {
 
     private val tag = "ChatGPTRepository"
     private val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(Const.GPT3_BASE_URL)
+        .baseUrl(Const.GPT_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(
             OkHttpClient.Builder()
@@ -26,7 +26,7 @@ class ChatGPTRepository {
         )
         .build()
 
-    private val gpt3API = retrofit.create(GPT3API::class.java)
+    private val gptAPI = retrofit.create(GPTAPI::class.java)
 
     /**
      * ApiKeyが有効化を確認
@@ -36,7 +36,7 @@ class ChatGPTRepository {
     fun checkAPIKey(apiKey: String): Boolean {
         val requestBody = getRequestBody(listOf(Message(role = Const.userRole, content = "Hello world!")))
         try {
-            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
+            val call = gptAPI.getCompletion(requestBody, "Bearer $apiKey")
             val response = call.execute()
             if (response.isSuccessful) {
                 Log.i(tag, "Successful: ${response.code()} ${response.message()}")
@@ -59,7 +59,7 @@ class ChatGPTRepository {
     fun generateText(messages: List<Message>, apiKey: String): Choice? {
         val requestBody = getRequestBody(messages)
         try {
-            val call = gpt3API.getCompletion(requestBody, "Bearer $apiKey")
+            val call = gptAPI.getCompletion(requestBody, "Bearer $apiKey")
             val response = call.execute()
             if (response.isSuccessful) {
                 val choice = response.body()?.choices?.getOrNull(0)
@@ -77,7 +77,7 @@ class ChatGPTRepository {
 
     private fun getRequestBody(messages: List<Message>): CompletionRequestBody {
         return CompletionRequestBody(
-            model = "gpt-3.5-turbo",
+            model = "gpt-4-0125-preview",
             messages = messages
         )
     }
