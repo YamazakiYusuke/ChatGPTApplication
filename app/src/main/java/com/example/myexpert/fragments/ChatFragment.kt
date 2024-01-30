@@ -102,23 +102,25 @@ class ChatFragment : Fragment() {
     private fun initializeSendButton() {
         binding.sendButton.setOnClickListener {
             try {
-                binding.sendButton.isEnabled = false
                 val inputText = getInputText()
                 if (inputText.isNotEmpty()) {
+                    binding.sendButton.isEnabled = false
                     addMessageListView(inputText)
                     lifecycleScope.launch(Dispatchers.IO) {
                         addMessageDatabase(inputText)
                         val choice = viewModel.generateText()
                         setChatGPTResponse(choice)
+                        withContext(Dispatchers.Main) {
+                            binding.sendButton.isEnabled = true
+                        }
                     }
                 }
             } catch (e: Exception) {
                 Log.e(tag, e.toString())
-            } finally {
                 binding.sendButton.isEnabled = true
             }
         }
-    }
+  }
 
     /**
      * 入力値を取得して、入力欄を空にする
