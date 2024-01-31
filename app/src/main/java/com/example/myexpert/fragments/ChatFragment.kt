@@ -105,6 +105,7 @@ class ChatFragment : Fragment() {
                 val inputText = getInputText()
                 if (inputText.isNotEmpty()) {
                     binding.sendButton.isEnabled = false
+                    binding.indicator.visibility = View.VISIBLE
                     addMessageListView(inputText)
                     lifecycleScope.launch(Dispatchers.IO) {
                         addMessageDatabase(inputText)
@@ -112,15 +113,17 @@ class ChatFragment : Fragment() {
                         setChatGPTResponse(choice)
                         withContext(Dispatchers.Main) {
                             binding.sendButton.isEnabled = true
+                            binding.indicator.visibility = View.GONE
                         }
                     }
                 }
             } catch (e: Exception) {
                 Log.e(tag, e.toString())
                 binding.sendButton.isEnabled = true
+                binding.indicator.visibility = View.GONE
             }
         }
-  }
+    }
 
     /**
      * 入力値を取得して、入力欄を空にする

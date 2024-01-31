@@ -18,6 +18,15 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+        <!-- CircleIndicatorを追加 -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal" />
+
         <!-- メッセージの入力欄と送信ボタンを表示するLayout -->
         <LinearLayout
             android:layout_width="match_parent"
