@@ -23,7 +23,7 @@
 
         <fragment
             android:id="@+id/bottom_nav"
-            android:name="com.example.myexpert.fragments.BottomNavBarFragment"
+            android:name="jp.yusuke.myexpert.fragments.BottomNavBarFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

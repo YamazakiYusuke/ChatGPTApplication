@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:807571631589:android:1ec2bcec99b6d7286b930c",
         "android_client_info": {
-          "package_name": "com.example.myexpert"
+          "package_name": "jp.yusuke.myexpert"
         }
       },
       "oauth_client": [
